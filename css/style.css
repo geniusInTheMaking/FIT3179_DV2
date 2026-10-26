@@ -1712,6 +1712,14 @@ h2.gender-heading {
   line-height: 1.7;
 }
 
+.credits-section .credits-list a:link,
+.credits-section .credits-list a:visited,
+.credits-section .credits-list a:hover,
+.credits-section .credits-list a:active {
+  color: #6b348d;
+  text-decoration: underline;
+}
+
 /* Source organisation names */
 .credits-section .credits-list strong {
   font-weight: 600;
@@ -1732,16 +1740,41 @@ h2.gender-heading {
 .credits-section .credits-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(4, auto);
-  grid-auto-flow: column;
+  grid-auto-flow: row;
   column-gap: 70px;
-  row-gap: 20px;
+  row-gap: 30px;
   align-items: start;
 }
 
 /* Spacing between individual sources */
 .credits-section .credits-list p {
+  min-width: 0;
   margin: 0;
+  overflow-wrap: break-word;
+}
+
+.credits-section .credits-list span {
+  display: block;
+  color: #68635e;
+  margin-top: 4px;
+}
+
+
+.waffle-chart-source {
+  display: table;
+  width: auto;
+  max-width: 100%;
+
+  border-top: 1px solid #ddd8d0;
+  padding-top: 12px;
+
+  font-size: 14px;
+  color: #77716b;
+  line-height: 1.6;
+
+  margin-top: -15px;
+  margin-bottom: 40px;
+  text-align: left;
 }
 
 /* Mobile responsiveness */
