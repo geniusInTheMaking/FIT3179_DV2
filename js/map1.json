@@ -1,0 +1,391 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 650,
+  "padding": {
+    "top": 0,
+    "bottom": 10,
+    "left": 0,
+    "right": 0
+  },
+  "background": null,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/nsw_lga.json",
+        "format": {
+          "type": "topojson",
+          "feature": "LGA_2025_AUST_GDA94"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.properties.LGA_NAME25 == 'Armidale' ? 'Armidale Regional' : datum.properties.LGA_NAME25 == 'Bayside (NSW)' ? 'Bayside' : indexof(['The Hills Shire', 'Hills Shire', 'The Hills', 'Hills, The'], datum.properties.LGA_NAME25) >= 0 ? 'Hills, The' : datum.properties.LGA_NAME25",
+          "as": "CouncilMatch"
+        },
+        {
+          "lookup": "CouncilMatch",
+          "from": {
+            "data": {
+              "url": "data/nsw_circulation_2024_25.csv",
+              "format": {
+                "type": "csv"
+              }
+            },
+            "key": "Council",
+            "fields": [
+              "Population",
+              "Circulation",
+              "per capita"
+            ]
+          }
+        },
+        {
+          "calculate": "toNumber(replace(toString(datum.Circulation), /,/g, ''))",
+          "as": "TotalLoans"
+        },
+        {
+          "calculate": "toNumber(datum.Population) > 0 ? toNumber(replace(toString(datum.Circulation), /,/g, '')) / toNumber(datum.Population) : null",
+          "as": "LoansPerResident"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#eeeeee",
+        "stroke": "#000000",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "CouncilMatch",
+            "type": "nominal",
+            "title": "Council"
+          },
+          {
+            "field": "TotalLoans",
+            "type": "quantitative",
+            "title": "Total loans",
+            "format": ",.0f"
+          },
+          {
+            "field": "LoansPerResident",
+            "type": "quantitative",
+            "title": "Annual loans per resident",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/nsw_lga_points.json",
+        "format": {
+          "type": "topojson",
+          "feature": "LGA_2025_AUST_GDA94"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.geometry != null"
+        },
+        {
+          "calculate": "datum.geometry.coordinates[0]",
+          "as": "longitude"
+        },
+        {
+          "calculate": "datum.geometry.coordinates[1]",
+          "as": "latitude"
+        },
+        {
+          "calculate": "datum.properties.LGA_NAME25 == 'Armidale' ? 'Armidale Regional' : datum.properties.LGA_NAME25 == 'Bayside (NSW)' ? 'Bayside' : indexof(['The Hills Shire', 'Hills Shire', 'The Hills', 'Hills, The'], datum.properties.LGA_NAME25) >= 0 ? 'Hills, The' : datum.properties.LGA_NAME25",
+          "as": "CouncilMatch"
+        },
+        {
+          "calculate": "datum.properties.LGA_NAME25",
+          "as": "CouncilName"
+        },
+        {
+          "lookup": "CouncilMatch",
+          "from": {
+            "data": {
+              "url": "data/nsw_circulation_2024_25.csv",
+              "format": {
+                "type": "csv"
+              }
+            },
+            "key": "Council",
+            "fields": [
+              "Population",
+              "Circulation",
+              "per capita"
+            ]
+          }
+        },
+        {
+          "filter": "isValid(datum.Circulation)"
+        },
+        {
+          "calculate": "toNumber(replace(toString(datum.Circulation), /,/g, ''))",
+          "as": "TotalLoans"
+        },
+        {
+          "calculate": "toNumber(datum['per capita'])",
+          "as": "LoansPerResident"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.7,
+        "stroke": "white",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "TotalLoans",
+          "type": "quantitative",
+          "title": "Total library loans",
+          "scale": {
+            "range": [15, 800]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "title": "Total Loans",
+            "offset": -50,
+            "values": [
+              100000,
+              300000,
+              500000,
+              700000,
+              900000
+            ],
+            "labelExpr": "datum.value / 1000 + 'k'",
+            "titleAnchor": "middle",
+            "titleFontSize": 14,
+            "labelFontSize": 14,
+            "titleFontWeight": "bold"
+          }
+        },
+        "color": {
+          "field": "LoansPerResident",
+          "type": "quantitative",
+          "title": "Annual loans per resident",
+          "scale": {
+            "range": [
+              "#F3D6D9",
+              "#D98F96",
+              "#B84D59",
+              "#8B1E2D",
+              "#5C1019"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "title": "Annual loans per resident",
+            "offset": -100,
+            "titleAnchor": "middle",
+            "padding": 0,
+            "titleFontSize": 14,
+            "labelFontSize": 14,
+            "titleFontWeight": "bold"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "CouncilMatch",
+            "type": "nominal",
+            "title": "Council"
+          },
+          {
+            "field": "Population",
+            "type": "quantitative",
+            "title": "Population",
+            "format": ",.0f"
+          },
+          {
+            "field": "TotalLoans",
+            "type": "quantitative",
+            "title": "Total library loans",
+            "format": ",.0f"
+          },
+          {
+            "field": "LoansPerResident",
+            "type": "quantitative",
+            "title": "Loans per resident",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/nsw_lga_points.json",
+        "format": {
+          "type": "topojson",
+          "feature": "LGA_2025_AUST_GDA94"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.geometry != null && indexof(['The Hills Shire', 'Hills Shire', 'The Hills', 'Hills, The'], datum.properties.LGA_NAME25) >= 0"
+        },
+        {
+          "calculate": "datum.geometry.coordinates[0]",
+          "as": "longitude"
+        },
+        {
+          "calculate": "datum.geometry.coordinates[1]",
+          "as": "latitude"
+        },
+        {
+          "calculate": "datum.longitude + 2.0",
+          "as": "labelLongitude"
+        },
+        {
+          "calculate": "datum.latitude - 2.2",
+          "as": "labelLatitude"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "color": "#77716B",
+        "strokeWidth": 1.4
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "longitude2": {
+          "field": "labelLongitude"
+        },
+        "latitude2": {
+          "field": "labelLatitude"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/nsw_lga_points.json",
+        "format": {
+          "type": "topojson",
+          "feature": "LGA_2025_AUST_GDA94"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.geometry != null && indexof(['The Hills Shire', 'Hills Shire', 'The Hills', 'Hills, The'], datum.properties.LGA_NAME25) >= 0"
+        },
+        {
+          "calculate": "datum.geometry.coordinates[0]",
+          "as": "longitude"
+        },
+        {
+          "calculate": "datum.geometry.coordinates[1]",
+          "as": "latitude"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "shape": "triangle",
+        "filled": true,
+        "size": 70,
+        "angle": 315,
+        "color": "#77716B"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "data/nsw_lga_points.json",
+        "format": {
+          "type": "topojson",
+          "feature": "LGA_2025_AUST_GDA94"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.geometry != null && indexof(['The Hills Shire', 'Hills Shire', 'The Hills', 'Hills, The'], datum.properties.LGA_NAME25) >= 0"
+        },
+        {
+          "calculate": "datum.geometry.coordinates[0] + 2.0",
+          "as": "labelLongitude"
+        },
+        {
+          "calculate": "datum.geometry.coordinates[1] - 2.2",
+          "as": "labelLatitude"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "dx": -20,
+        "dy": 8,
+        "font": "Helvetica Neue",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "lineHeight": 19,
+        "color": "#252525"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "labelLongitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "labelLatitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "value": [
+            "Highest",
+            "Total Borrowing",
+            "The Hills · 1.59M loans"
+          ]
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "fill": null,
+      "stroke": null
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "titleFontWeight": "bold",
+      "padding": 10
+    }
+  }
+}

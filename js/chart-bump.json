@@ -1,0 +1,187 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width":1100,
+  "height": 440,
+  "background": null,
+  "padding": {
+    "left": 15,
+    "right": 25,
+    "top": 15,
+    "bottom": 10
+  },
+  "data": {
+    "url": "data/nsw_book_categories_trend.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "params": [
+    {
+      "name": "visibleYear",
+      "value": 3
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "indexof(['2021-22','2022-23','2023-24','2024-25'], datum.Year)",
+      "as": "YearIndex"
+    },
+    {
+      "window": [
+        {
+          "op": "rank",
+          "as": "Rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "Circulation",
+          "order": "descending"
+        }
+      ],
+      "groupby": ["Year"]
+    },
+    {
+      "filter": "datum.YearIndex >= 0 && datum.YearIndex <= visibleYear"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "YearIndex",
+      "type": "quantitative",
+      "scale": {
+        "domain": [0, 3],
+        "nice": false
+      },
+      "axis": {
+        "title": null,
+        "values": [0, 1, 2, 3],
+        "labelExpr": "['2021–22','2022–23','2023–24','2024–25'][datum.value]",
+        "labelAngle": 0,
+        "labelFontSize": 16,
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "Rank",
+      "type": "quantitative",
+      "scale": {
+        "domain": [8.5, 0.5],
+        "nice": false,
+        "zero": false
+      },
+      
+      "axis": {
+  "title": ["Borrowing", "rank"],
+  "titlePadding": 20,
+  "values": [1, 2, 3, 4, 5, 6, 7, 8],
+  "labelExpr": "'#' + datum.value",
+  "labelAngle": 0,
+  "labelFontSize": 18,
+  "titleFontSize": 16,
+  "grid": true,
+  "gridColor": "#e6e0d8"
+}
+    },
+    "color": {
+      "field": "Genre",
+      "type": "nominal",
+      "title": "Book category",
+      "scale": {
+        "domain": [
+          "Adult Fiction",
+          "Adult Non-Fiction",
+          "Young Adult Fiction",
+          "Young Adult Non-Fiction",
+          "Junior Fiction",
+          "Junior Non-Fiction",
+          "Picture/Easy Fiction",
+          "Picture/Easy Non-Fiction"
+        ],
+        "range": [
+          "#4C78A8",
+          "#F28E2B",
+          "#59A14F",
+          "#F4A6C1",
+          "#8B5A2B",
+          "#76B7B2",
+          "#B07AA1",
+          "#EDC948"
+        ]
+      },
+      "legend": {
+        "orient": "right",
+        "labelFontSize": 14,
+        "titleFontSize": 16,
+        "symbolStrokeWidth": 3
+      }
+    },
+    "detail": {
+      "field": "Genre"
+    },
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "nominal",
+        "title": "Year"
+      },
+      {
+        "field": "Genre",
+        "type": "nominal",
+        "title": "Book category"
+      },
+      {
+        "field": "Rank",
+        "type": "quantitative",
+        "title": "Rank",
+        "format": ".0f"
+      },
+      {
+        "field": "Circulation",
+        "type": "quantitative",
+        "title": "Total loans",
+        "format": ","
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "strokeCap": "round"
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "filled": true,
+        "size": 100,
+        "stroke": "white",
+        "strokeWidth": 1.5
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Helvetica Neue",
+    "axis": {
+      "labelColor": "#514b46",
+      "titleColor": "#514b46",
+      "domain": false,
+      "tickColor": "#d6cec4"
+    },
+    "axisY": {
+  "titleAngle": 0,
+  "titleAlign": "center",
+  "titleBaseline": "middle"
+},
+    "legend": {
+      "labelColor": "#514b46",
+      "titleColor": "#514b46"
+    }
+  }
+}

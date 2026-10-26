@@ -1,0 +1,188 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "width": "container",
+  "height": 330,
+  "background": null,
+
+  "data": {
+    "url": "data/reading_leisure.csv"
+  },
+
+  "transform": [
+    {
+      "calculate": "datum.Generation === 'Generation Z' ? 'Generation Z (15 - 29)' : datum.Generation === 'Millennials' ? 'Millennials (30 - 45)' : datum.Generation === 'Generation X' ? 'Generation X (46 - 61)' : datum.Generation === 'Baby Boomers' ? 'Baby Boomers (62 - 77)' : datum.Generation === 'Interwar' ? 'Interwar (78+)' : datum.Generation",
+      "as": "GenerationLabel"
+    },
+    {
+      "calculate": "datum.Generation === 'Generation Z' ? 1 : datum.Generation === 'Millennials' ? 2 : datum.Generation === 'Generation X' ? 3 : datum.Generation === 'Baby Boomers' ? 4 : datum.Generation === 'Interwar' ? 5 : 99",
+      "as": "GenerationOrder"
+    },
+    {
+      "calculate": "format(datum.Participation, '.1f') + '%'",
+      "as": "ParticipationLabel"
+    }
+  ],
+
+  "encoding": {
+    "y": {
+      "field": "GenerationLabel",
+      "type": "nominal",
+      "sort": {
+        "field": "GenerationOrder",
+        "op": "min",
+        "order": "ascending"
+      },
+      "axis": {
+        "title": null,
+        "domain": false,
+        "ticks": false,
+        "labelFont": "Helvetica Neue",
+        "labelFontSize": 16,
+        "labelColor": "#3f3b38",
+        "labelPadding": 15
+      }
+    },
+
+    "x": {
+      "field": "Participation",
+      "type": "quantitative",
+      "scale": {
+        "domain": [0, 55]
+      },
+      "axis": {
+        "title": "Reading for leisure participation rate (%)",
+        "titleFont": "Helvetica Neue",
+        "titleFontSize": 16,
+        "titleFontWeight": 500,
+        "titlePadding": 15,
+        "labelFont": "Helvetica Neue",
+        "labelFontSize": 15,
+        "values": [0, 10, 20, 30, 40, 50],
+        "labelExpr": "datum.value + '%'",
+        "domain": false,
+        "ticks": false,
+        "grid": true,
+        "gridColor": "#ded9d2",
+        "gridOpacity": 0.7
+      }
+    }
+  },
+
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 3,
+        "color": "#c9b8a6"
+      },
+      "encoding": {
+        "x": {
+          "datum": 0
+        },
+        "x2": {
+          "field": "Participation"
+        }
+      }
+    },
+
+    {
+      "mark": {
+        "type": "circle",
+        "size": 260,
+        "color": "#8a5a3b"
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "GenerationLabel",
+            "type": "nominal",
+            "title": "Generation"
+          },
+          {
+            "field": "Participation",
+            "type": "quantitative",
+            "title": "Participation",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 13,
+        "font": "Helvetica Neue",
+        "fontSize": 14,
+        "fontWeight": 700,
+        "color": "#8a5a3b"
+      },
+      "encoding": {
+        "text": {
+          "field": "ParticipationLabel",
+          "type": "nominal"
+        }
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "filter": "datum.Generation === 'Baby Boomers'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dx": -12,
+        "dy": -14,
+        "font": "Helvetica Neue",
+        "fontSize": 15,
+        "fontWeight": 600,
+        "fontStyle": "italic",
+        "color": "#ca630e"
+      },
+      "encoding": {
+        "text": {
+          "value": "Sharp rise after Gen X"
+        }
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "filter": "datum.Generation === 'Interwar'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dx": -12,
+        "dy": -14,
+        "font": "Helvetica Neue",
+        "fontSize": 15,
+        "fontWeight": 600,
+        "fontStyle": "italic",
+        "color": "#ca630e"
+      },
+      "encoding": {
+        "text": {
+          "value": "4.2× Gen Z's participation rate"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

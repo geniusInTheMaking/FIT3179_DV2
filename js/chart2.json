@@ -1,0 +1,286 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "width": "container",
+  "height": 300,
+
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+
+  "padding": {
+    "top": 25,
+    "left": 5,
+    "right": 45,
+    "bottom": 5
+  },
+
+  "data": {
+    "url": "data/reading_time_sex.csv"
+  },
+
+  "transform": [
+    {
+      "fold": ["Male", "Female"],
+      "as": ["Gender", "Hours"]
+    }
+  ],
+
+  "encoding": {
+    "y": {
+      "field": "Generation",
+      "type": "nominal",
+      "sort": [
+        "Generation Z",
+        "Millennials",
+        "Generation X",
+        "Baby Boomers",
+        "Interwar"
+      ],
+      "axis": {
+        "title": null,
+        "domain": false,
+        "ticks": false,
+        "labelFont": "Helvetica Neue",
+        "labelFontSize": 17,
+        "labelColor": "#3f3b38",
+        "labelPadding": 15
+      }
+    },
+
+    "x": {
+      "field": "Hours",
+      "type": "quantitative",
+      "scale": {
+        "domain": [0, 2.2],
+        "nice": false
+      },
+      "axis": {
+        "title": "Average reading time per day (hours)",
+        "titleFont": "Helvetica Neue",
+        "titleFontSize": 16,
+        "titleFontWeight": 500,
+        "titlePadding": 20,
+        "titleColor": "#252525",
+        "labelFont": "Helvetica Neue",
+        "labelFontSize": 15,
+        "labelColor": "#68635e",
+        "values": [0, 0.5, 1, 1.5, 2],
+        "labelExpr": "datum.value + 'h'",
+        "domain": false,
+        "ticks": false,
+        "grid": true,
+        "gridColor": "#ded9d2",
+        "gridOpacity": 0.7
+      }
+    },
+
+    "color": {
+      "field": "Gender",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Male", "Female"],
+        "range": ["#4f6d7a", "#b66b5d"]
+      },
+      "legend": {
+        "title": null,
+        "orient": "top",
+        "direction": "horizontal",
+        "symbolType": "circle",
+        "symbolSize": 180,
+        "labelFont": "Helvetica Neue",
+        "labelFontSize": 15,
+        "labelColor": "#3f3b38",
+        "offset": 5,
+        "encode": {
+          "symbols": {
+            "update": {
+              "fillOpacity": {
+                "value": 1
+              },
+              "strokeWidth": {
+                "value": 0
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "layer": [
+    {
+      "transform": [
+        {
+          "pivot": "Gender",
+          "value": "Hours",
+          "groupby": ["Generation"]
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "Male",
+          "type": "quantitative"
+        },
+        "x2": {
+          "field": "Female"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.Generation === 'Millennials'",
+            "value": "#ca630e"
+          },
+          "value": "#c9b8a6"
+        }
+      }
+    },
+
+    {
+      "mark": {
+        "type": "circle",
+        "size": 280,
+        "filled": true,
+        "stroke": "#ffffff",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "Generation",
+            "type": "nominal",
+            "title": "Generation"
+          },
+          {
+            "field": "Gender",
+            "type": "nominal",
+            "title": "Gender"
+          },
+          {
+            "field": "Hours",
+            "type": "quantitative",
+            "title": "Reading hours",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "filter": "datum.Gender === 'Male'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "font": "Helvetica Neue",
+        "fontSize": 15,
+        "fontWeight": 600
+      },
+      "encoding": {
+        "text": {
+          "field": "Hours",
+          "type": "quantitative",
+          "format": ".1f"
+        },
+        "color": {
+          "value": "#4f6d7a"
+        }
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "filter": "datum.Gender === 'Female'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 12,
+        "font": "Helvetica Neue",
+        "fontSize": 15,
+        "fontWeight": 600
+      },
+      "encoding": {
+        "text": {
+          "field": "Hours",
+          "type": "quantitative",
+          "format": ".1f"
+        },
+        "color": {
+          "value": "#b66b5d"
+        }
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "filter": "datum.Generation === 'Generation Z' && datum.Gender === 'Female'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dx": -5,
+        "dy": -17,
+        "font": "Helvetica Neue",
+        "fontSize": 15,
+        "fontWeight": 700,
+        "fontStyle": "italic",
+        "color": "#554131"
+      },
+      "encoding": {
+        "text": {
+          "value": "Smallest gap: 6 min"
+        }
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "filter": "datum.Generation === 'Millennials' && datum.Gender === 'Female'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dx": -5,
+        "dy": -5,
+        "font": "Helvetica Neue",
+        "fontSize": 15,
+        "fontWeight": 700,
+        "fontStyle": "italic",
+        "color": "#1f1515"
+      },
+      "encoding": {
+        "text": {
+          "value": "Largest gap: 24 min"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "font": "Helvetica Neue",
+    "view": {
+      "stroke": null
+    }
+  }
+}

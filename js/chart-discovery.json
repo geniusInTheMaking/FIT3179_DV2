@@ -1,0 +1,292 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Book discovery methods reported by Australians aged 15+ in the 2025 National Arts Participation Survey. Multiple responses allowed.",
+  "background": null,
+  "width": 600,
+  "height": 550,
+  "padding": {
+    "left": 20,
+    "right": 10,
+    "top": 10,
+    "bottom": 10
+  },
+
+  "data": {
+    "url": "data/book_discovery.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+
+  "transform": [
+    {
+      "calculate": "toNumber(datum.Percentage)",
+      "as": "Pct"
+    },
+    {
+      "calculate": "datum.Pct / 100 * 2 * PI",
+      "as": "EndAngle"
+    },
+    {
+      "calculate": "datum.Method + ' (' + format(datum.Pct, '.0f') + '%)'",
+      "as": "MethodLabel"
+    },
+    {
+      "calculate": "datum.Method == 'Word of mouth' ? 255 : datum.Method == 'Libraries' ? 215 : datum.Method == 'Bookshops' ? 175 : datum.Method == 'Social media' ? 135 : datum.Method == 'Podcasts' ? 95 : datum.Method == 'Online forums' ? 55 : 25",
+      "as": "OuterRadius"
+    },
+    {
+      "calculate": "datum.OuterRadius - 17",
+      "as": "InnerRadius"
+    },
+    {
+      "calculate": "datum.OuterRadius - 8.5",
+      "as": "MidRadius"
+    },
+    {
+      "calculate": "275 - datum.MidRadius",
+      "as": "LabelY"
+    }
+  ],
+
+  "layer": [
+    {
+      "mark": {
+        "type": "arc",
+        "cornerRadius": 12
+      },
+      "encoding": {
+        "theta": {
+          "field": "EndAngle",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 6.283185307179586],
+            "range": [0, 6.283185307179586]
+          },
+          "stack": false
+        },
+        "theta2": {
+          "datum": 0
+        },
+        "radius": {
+          "field": "OuterRadius",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 360],
+            "range": [0, 360]
+          }
+        },
+        "radius2": {
+          "field": "InnerRadius",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 360],
+            "range": [0, 360]
+          }
+        },
+        "color": {
+          "field": "Method",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Word of mouth",
+              "Libraries",
+              "Bookshops",
+              "Social media",
+              "Podcasts",
+              "Online forums",
+              "Book clubs"
+            ],
+            "range": [
+              "#238B8B",
+              "#397DC6",
+              "#F29A38",
+              "#9063C9",
+              "#4FAE70",
+              "#22AFC4",
+              "#D5AC35"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "Method",
+            "type": "nominal",
+            "title": "Discovery method"
+          },
+          {
+            "field": "Pct",
+            "type": "quantitative",
+            "title": "Respondents (%)",
+            "format": ".0f"
+          }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 15,
+        "fontWeight": "normal",
+        "color": "#333333",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12
+      },
+      "encoding": {
+        "x": {
+          "datum": 300,
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 600],
+            "range": [0, 600]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "LabelY",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 550],
+            "range": [0, 550]
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "MethodLabel",
+          "type": "nominal"
+        }
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "x": 40,
+            "y": 365,
+            "label": "PERSONAL RECOMMENDATIONS STILL LEAD"
+          },
+          {
+            "x": 40,
+            "y": 455,
+            "label": "LIBRARIES REMAIN RELEVANT"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 15,
+        "fontWeight": "bold",
+        "color": "#238B8B",
+        "align": "left",
+        "baseline": "top"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 600],
+            "range": [0, 600]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 550],
+            "range": [0, 550]
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+
+    {
+      "data": {
+        "values": [
+          {
+            "x": 40,
+            "y": 390,
+            "label": "Word of mouth (39%) is nearly twice as common"
+          },
+          {
+            "x": 40,
+            "y": 410,
+            "label": "as social media (22%)."
+          },
+          {
+            "x": 40,
+            "y": 480,
+            "label": "Libraries (29%) exceed social media (22%)"
+          },
+          {
+            "x": 40,
+            "y": 500,
+            "label": "by 7 percentage points."
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "Arial",
+        "fontSize": 15,
+        "fontWeight": "normal",
+        "color": "#555555",
+        "align": "left",
+        "baseline": "top"
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 600],
+            "range": [0, 600]
+          },
+          "axis": null
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 550],
+            "range": [0, 550]
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+
+  "resolve": {
+    "scale": {
+      "theta": "independent",
+      "radius": "independent",
+      "x": "independent",
+      "y": "independent"
+    }
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial"
+  }
+}

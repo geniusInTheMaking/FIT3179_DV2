@@ -1,0 +1,2090 @@
+
+/* ==========================================
+   GLOBAL
+========================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: #f7f4ee;
+  color: #252525;
+}
+
+main {
+  width: min(1400px, 94%);
+  margin: 0 auto;
+}
+
+
+/* ==========================================
+   HERO / HEADER
+========================================== */
+
+.hero {
+  position: relative;
+  height: 420px;
+  background-image: url("../images/Library.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.80);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 40px;
+  text-align: center;
+  color: white;
+}
+
+.hero h1 {
+  margin: 0 auto;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.main-subtitle {
+  max-width: 1400px;
+  margin: 30px auto 0;
+  font-size: 27px;
+  line-height: 1.6;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: bold;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+/* ==========================================
+   INTRODUCTION
+========================================== */
+
+.intro {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 70px 0 50px;
+  display: block;
+  /* grid-template-columns: 1.35fr 0.8fr;
+  gap: 45px;
+  align-items: center; */
+}
+
+.intro-text-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 50px;
+  width: 100%;
+  align-items: start;
+  
+}
+
+.intro-text {
+  max-width: 650px;
+  margin: 0 0 25px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #55514d;
+  text-align: left;
+}
+
+.intro-text-box {
+ 
+  
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #55514d;
+  text-align: left;
+}
+
+
+.intro-text-grid > div {
+  padding-top: 0;
+}
+
+.intro-text-grid > div > .intro-text:first-child {
+  margin-top: 0;
+}
+
+.intro-left {
+  text-align: left;
+}
+
+.intro .section-label {
+  margin: 0 0 30px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #252525;
+  text-align: left;
+  max-width: 650px;
+}
+
+.intro .intro-text {
+  max-width: 650px;
+  margin: 0 0 25px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #55514d;
+  text-align: left;
+}
+
+.intro .intro-text strong {
+  color: #252525;
+  font-weight: 700;
+}
+
+
+/* ==========================================
+   FACT CARDS
+========================================== */
+/* 
+.fact-cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+  margin-top: 35px;
+}
+
+.fact-card {
+  position: relative;
+  width: 100%;
+  min-height: 190px;
+  padding: 0;
+  border: 1px solid #d2c6b8;
+  border-radius: 10px;
+  background: #ebe3d8;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.fact-card:hover {
+  transform: translateY(-4px);
+  border-color: #8a5a3b;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+}
+
+.fact-front,
+.fact-back {
+  width: 100%;
+  min-height: 190px;
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.fact-title {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #252525;
+}
+
+.fact-number {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1;
+  color: #8a5a3b;
+}
+
+.click-text {
+  margin-top: 9px;
+  font-size: 18px;
+  color: #817a73;
+}
+
+.click-text-return {
+  margin-top: 9px;
+  font-size: 18px;
+  color: #d2c6b8;
+}
+
+.fact-back {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  background: #8a5a3b;
+  color: white;
+}
+
+.fact-description {
+  max-width: 580px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.fact-card.active .fact-front {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.fact-card.active .fact-back {
+  opacity: 1;
+  transform: translateY(0);
+}
+ */
+
+
+ /* ==========================================
+   FACT CARDS — SAGE & IVORY
+========================================== */
+
+.fact-cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+  margin-top: 35px;
+}
+
+.fact-card {
+  position: relative;
+  width: 100%;
+  min-height: 230px;
+  padding: 0;
+  border: 1px solid #d5ddd5;
+  border-radius: 14px;
+  background: #F4F3EB;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+
+  box-shadow: 0 4px 15px rgba(38, 60, 52, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.fact-card:hover {
+  transform: translateY(-5px);
+  border-color: #42675C;
+  box-shadow: 0 12px 28px rgba(38, 60, 52, 0.14);
+}
+
+.fact-card:focus-visible {
+  outline: 2px solid #42675C;
+  outline-offset: 3px;
+}
+
+/* FRONT AND BACK */
+
+.fact-front,
+.fact-back {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 230px;
+  padding: 24px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* FRONT */
+
+.fact-front {
+  background: #F4F3EB;
+}
+
+.fact-title {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #175240;
+}
+
+.fact-number {
+  display: block;
+  margin: 0 0 14px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 3vw, 48px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #42675C;
+  text-align: center;
+}
+
+.click-text {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #66776D;
+}
+
+/* BACK */
+
+.fact-back {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(10px);
+
+  background: #42675C;
+  color: #FFFFFF;
+}
+
+.fact-description {
+  max-width: 100%;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.click-text-return {
+  margin-top: 14px;
+  font-size: 16px;
+  color: #DCE8DE;
+}
+
+/* CITATION */
+
+.fact-source {
+  display: block;
+  margin-top: 12px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #DCE8DE;
+  text-align: center;
+}
+
+/* FLIP ANIMATION */
+
+.fact-card.active .fact-front {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.fact-card.active .fact-back {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* ==========================================
+   STORY SECTION
+========================================== */
+
+.story-section {
+  padding: 25px 0 60px;
+}
+
+.story-section .section-label {
+  margin: 0 0 20px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: left;
+  color: #252525;
+}
+
+.story-section h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #252525;
+}
+
+.story-section .intro-text,
+.story-section .intro-text-2 {
+  max-width: 700px;
+  margin: 0 0 30px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #55514d;
+  text-align: left;
+}
+
+.story-section .intro-text-2 {
+  transform: translateY(-65px);
+}
+
+.story-section p.intro-text-2 {
+  transform: translateY(-90px);
+}
+
+.story-section p {
+  color: #68635e;
+  font-size: 17px;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.story-section h2.subtitle {
+  margin: 0 0 0;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  color: #252525;
+  transform: translateY(-95px);
+}
+
+.story-section h2.subtitle-2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  color: #252525;
+  transform: translateY(-95px);
+}
+
+
+/* ==========================================
+   VISUALISATION 1
+   LOLLIPOP CHART + INSIGHT PANEL
+========================================== */
+
+.generation-visual-layout {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 60px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: start;
+}
+.chart-container {
+  width: 100%;
+  overflow: visible;
+}
+
+#chart1 {
+  width: 100%;
+  min-width: 0;
+}
+
+#chart1 .vega-embed {
+  width: 100%;
+  padding: 0;
+}
+
+#chart1 .vega-embed > div {
+  width: 100%;
+}
+
+#chart1 svg,
+#chart1 canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* ==========================================
+   INSIGHT PANEL
+========================================== */
+
+.generation-insight {
+  width: 310px;
+  min-height: 0;
+  height: fit-content;
+  padding: 0;
+  align-self: start;
+  transform: translateX(-60px);
+  background: #ebe3d8;
+  border: 1px solid #d2c6b8;
+  overflow: hidden;
+
+  transform: translateY(-140px);
+  
+}
+
+/* Brown heading area */
+
+.insight-header {
+  padding: 24px 25px;
+  background: #8a5a3b;
+  color: #ffffff;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+/* Beige content area */
+
+.insight-content {
+  padding: 30px 25px;
+}
+
+.insight-item {
+  margin-bottom: 27px;
+}
+
+.insight-item h3 {
+  margin: 0 0 8px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #252525;
+}
+
+.story-section .insight-item p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #68635e;
+}
+
+
+/* ==========================================
+   VISUALISATION 2
+   DUMBBELL PLOT
+========================================== */
+
+.dumbbell-legend {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+
+  
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4e4945;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.male-dot {
+  background-color: #4f6d7a;
+}
+
+.female-dot {
+  background-color: #b66b5d;
+}
+
+.dumbbell-chart-container {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+}
+
+.dumbbell-legend {
+  display: none;
+}
+
+#chart2 {
+  width: 100%;
+  max-width: none;
+  margin-bottom: 40px;
+  
+}
+
+#chart2 .vega-embed {
+  width: 100%;
+  padding: 0;
+}
+
+#chart2 .vega-embed > div {
+  width: 100%;
+  
+}
+
+/* #chart2 svg {
+  display: block;
+  max-width: 100%;
+} */
+
+
+/* ==========================================
+   Section 2 
+========================================== */
+
+.map-section {
+  padding: 0 0 60px;
+  margin-top: 0px;
+}
+
+.map-section .section-label {
+  margin: 0 0 20px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: left;
+  color: #252525;
+}
+
+
+.map-intro {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 50px;
+  width: 100%;
+  align-items: start;
+}
+
+.map-intro .intro-text {
+  margin: 0;
+  max-width: none;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.7;
+  color: #55514d;
+  text-align: left;
+  
+}
+
+
+.map-intro .intro-text-2 {
+  margin: 0;
+  max-width: 650px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.7;
+  color: #55514d;
+  text-align: left;
+}
+
+/* .map-section .subtitle-2 {
+  margin: 30px 0 20px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  color: #252525;
+  
+} */
+
+
+
+.map-section .intro-text {
+  max-width: 700px;
+  margin: 0 0 25px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #55514d;
+  text-align: left;
+}
+
+
+/* ==========================================
+   NSW LIBRARY BORROWING MAP + TEXT
+========================================== */
+
+.map-visual-layout {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 50px;
+  align-items: start;
+  margin-top: 0px;
+}
+
+.map-text {
+  min-width: 0;
+  padding-top: 50px;
+}
+
+.map-section .map-text .intro-text {
+  max-width: none;
+  margin: 0 0 25px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1.7;
+  color: #55514d;
+  text-align: left;
+}
+
+.map-chart-container {
+  width: 100%;
+  min-width: 0;
+  margin-top: -100px;
+  transform: translateX(100px);
+}
+
+.map-chart-container-2 {
+  width: 100%;
+  min-width: 0;
+  margin-top: -100px;
+  transform: translateX(0px);
+  background: #ffffff;
+  padding: 30px;
+}
+
+#chart3 {
+  width: 100%;
+  min-width: 0;
+}
+
+#chart3 .vega-embed {
+  width: 100%;
+  padding: 0;
+}
+
+#chart3 .vega-embed > div {
+  width: 100%;
+}
+
+#chart3 svg,
+#chart3 canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* TABLET AND MOBILE */
+
+@media (max-width: 900px) {
+  .map-visual-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .map-section .map-text .intro-text {
+    font-size: 18px;
+  }
+
+  .map-chart-container {
+    margin-top: 0;
+    transform: none;
+  }
+
+  .map-section .map-text .intro-text {
+    font-size: 18px;
+  }
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1100px) {
+  .hero h1 {
+    font-size: 58px;
+  }
+
+  .hero-content {
+    padding: 30px;
+  }
+
+  .intro {
+    gap: 45px;
+  }
+
+  .generation-visual-layout {
+    width: 100%;
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .generation-insight {
+    width: 270px;
+  }
+}
+
+
+/* ==========================================
+   SMALL TABLET
+========================================== */
+
+@media (max-width: 900px) {
+  .generation-visual-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .generation-insight {
+    width: 100%;
+  }
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 700px) {
+  main {
+    width: 90%;
+  }
+
+  /* Hero */
+
+  .hero {
+    height: 360px;
+    background-position: center;
+  }
+
+  .hero-content {
+    padding: 25px 20px;
+  }
+
+  .hero h1 {
+    font-size: 38px;
+    white-space: normal;
+  }
+
+  .main-subtitle {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* Introduction */
+
+  .intro {
+    padding: 45px 0 35px;
+    display: block;
+  }
+
+  .intro .section-label {
+    margin-bottom: 25px;
+    font-size: 34px;
+  }
+
+  .intro .intro-text {
+    max-width: none;
+    font-size: 16px;
+  }
+
+  .fact-cards {
+    margin-top: 40px;
+  }
+
+  /* Story section */
+
+  .story-section .section-label {
+    font-size: 34px;
+  }
+
+  .story-section h2.subtitle,
+  .story-section h2.subtitle-2 {
+    font-size: 20px;
+  }
+
+  .story-section p {
+    font-size: 16px;
+  }
+
+  /* Lollipop chart */
+
+  .generation-visual-layout {
+    margin-top: 25px;
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .chart-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .generation-insight {
+    width: 100%;
+  }
+
+  .insight-header {
+    padding: 15px;
+    font-size: 15px;
+  }
+
+  .insight-content {
+    padding: 22px 20px;
+  }
+
+  /* Dumbbell chart */
+
+  .dumbbell-legend {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin: 10px 0 15px;
+    transform: translateY(-80px);
+  }
+  
+  /* Dumbbell chart */
+ 
+}
+
+
+/* ==========================================
+   FULL-WIDTH WAFFLE CHART
+========================================== */
+
+/* ==========================================
+   CENTERED, FULL-WIDTH WAFFLE CHART
+========================================== */
+
+#chart-waffle {
+  width: 100%;
+  max-width: none;
+  margin: 30px auto 40px;
+  display: flex;
+  justify-content: center;
+}
+
+#chart-waffle .vega-embed {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#chart-waffle canvas,
+#chart-waffle svg {
+  max-width: 100%;
+}
+
+
+/* ==========================================
+   BAR CHART SECTION
+========================================== */
+
+.bar-chart-layout {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 50px;
+  align-items: start;
+  margin-top: 25px;
+  margin-bottom: 60px;
+}
+
+.bar-chart-text {
+  min-width: 0;
+  padding-top: 10px;
+}
+
+.bar-chart-text .intro-text {
+  max-width: 650px;
+  margin: 0 0 25px;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+.bar-chart-container {
+  width: 100%;
+  min-width: 0;
+  transform: translateY(-40px);
+}
+
+#chart-bar {
+  width: 100%;
+  min-width: 0;
+}
+
+#chart-bar .vega-embed {
+  width: 100%;
+}
+
+#chart-bar svg,
+#chart-bar canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 900px) {
+  .bar-chart-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .bar-chart-text .intro-text {
+    font-size: 18px;
+  }
+}
+
+
+/* ==========================================
+   BUTTERFLY CHART LAYOUT
+========================================== */
+
+.butterfly-visual-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 650px) minmax(0, 1fr);
+  align-items: start;
+  gap: 45px;
+  width: 100%;
+}
+
+/* LEFT TEXT */
+
+.butterfly-text {
+  width: 100%;
+  max-width: 650px;
+  text-align: left;
+  transform: translateY(0);
+}
+
+.butterfly-text .intro-text {
+  margin-bottom: 24px;
+  line-height: 1.8;
+  max-width: 650px;
+}
+
+/* RIGHT CHART */
+.butterfly-chart-container {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  transform: translateX(30px);
+  transform: translateY(-40px);
+}
+
+#chart-language-butterfly {
+  width: max-content;
+  max-width: none;
+}
+
+/* RESPONSIVE LAYOUT */
+
+@media (max-width: 1000px) {
+  .butterfly-visual-layout {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .butterfly-chart-container {
+    justify-content: flex-start;
+  }
+}
+
+
+
+/* =====================================
+   BUMP CHART INTERACTIVE CONTROLS
+===================================== */
+
+.bump-chart-section {
+  width: 100%;
+  margin: 30px auto;
+}
+
+#chart-bump {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.bump-controls {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.bump-control-heading {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #514b46;
+  margin-bottom: 16px;
+}
+
+.bump-button-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bump-btn {
+  padding: 11px 18px;
+  background: #ffffff;
+  border: 1px solid #d6cec4;
+  border-radius: 6px;
+  color: #514b46;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease,
+              color 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.bump-btn:hover {
+  background: #f1ebe4;
+}
+
+.bump-primary {
+  background: #514b46;
+  color: white;
+  border-color: #514b46;
+}
+
+.bump-primary:hover {
+  background: #70645b;
+}
+
+.bump-btn.active {
+  background: #e8ddd0;
+  border-color: #9d8a75;
+  font-weight: 600;
+}
+
+.bump-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#bump-status {
+  margin-top: 14px;
+  font-size: 12px;
+  color: #77716b;
+}
+
+
+.nsw-map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(300px, 1fr);
+  gap: 30px;
+  width: 100%;
+  align-items: start;
+  margin-top: 40px;
+}
+
+.nsw-map-layout .nsw-map-description{
+max-width: 700px;
+  margin: 0 0 25px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #55514d;
+  text-align: left;
+}
+
+.nsw-main-map {
+  min-width: 0;
+}
+
+.nsw-council-panel {
+  background: #f7f8fa;
+  padding: 24px;
+  border-radius: 12px;
+  min-width: 0;
+}
+
+#map-nsw,
+#council-zoom {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .nsw-map-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================
+   NSW LINKED MAP
+========================================= */
+
+.nsw-map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(340px, 1fr);
+  gap: 35px;
+  width: 100%;
+  margin: 45px auto 70px;
+  align-items: start;
+}
+
+.nsw-main-map {
+  min-width: 0;
+}
+
+.nsw-main-map h3,
+.nsw-council-panel h3 {
+  margin: 0;
+  
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  color: #252525;
+ 
+}
+.nsw-map-layout .nsw-main-map h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  color: #252525;
+}
+
+
+.nsw-map-description {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555;
+  max-width: 650px;
+  margin-bottom: 20px;
+}
+
+#map-nsw {
+  width: 100%;
+  overflow: visible;
+}
+
+.nsw-council-panel {
+  background: #f7f8fa;
+  padding: 26px;
+  border-radius: 12px;
+  min-width: 0;
+}
+
+#selected-council-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: #3274a1;
+  margin: 15px 0;
+}
+
+#council-zoom {
+  width: 100%;
+  min-height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.council-stats {
+  border-top: 1px solid #dedede;
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  
+}
+
+.council-stats span {
+  font-size: 18px;
+  color: #666;
+}
+
+.council-stats strong {
+  font-size: 30px;
+  font-weight: 700;
+  color: #3274a1;
+}
+
+.council-legend {
+  font-size: 18px;
+  color: #555;
+  margin-top: 18px;
+}
+
+@media (max-width: 1100px) {
+  .nsw-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .nsw-council-panel {
+    max-width: 650px;
+  }
+}
+
+
+.nsw-dot-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 18px;
+  color: #3f3b38;
+}
+
+.nsw-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #3274a1;
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+
+
+/* QUEENSLAND CHOROPLETH LAYOUT */
+
+.map-visual-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 45px;
+  align-items: start;
+  width: 100%;
+}
+
+.map-text,
+.map-chart-container {
+  min-width: 0;
+  
+}
+
+.map-subtitle {
+
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 30px;
+}
+
+
+.map-subtitle-second {
+  transform: translateY(40px);
+  width: 100%;
+  max-width: 100%;
+
+  /* Option 1: Chart heading design */
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #252525;
+  line-height: 1.3;
+
+  border-left: 4px solid #b54b0b;
+  padding-left: 16px;
+  box-sizing: border-box;
+}
+
+.map-subtitle-2 {
+  width: 50%;
+  max-width: 100%;
+  margin-bottom: 0px;
+}
+
+#map-qld-digital {
+  width: 100%;
+}
+
+#map-qld-digital .vega-embed {
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .map-visual-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+#map-qld-digital {
+  margin-left: -30px;
+}
+
+@media (max-width: 900px) {
+  #map-qld-digital {
+    margin-left: 0;
+  }
+}
+
+
+
+
+.story-section h2.subtitle-2,
+ h2.subtitle-2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  color: #252525;
+}
+
+
+.story-section h2.subtitle-2,
+ h2.subtitle-2-higher {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  color: #252525;
+  transform: translateY(-75px) ;
+}
+
+.story-section h2.subtitle-2,
+ p.text {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: left;
+  color: #252525;
+  width: 650px;
+  transform: translateY(-75px) ;
+  line-height: 1.7;
+}
+
+
+
+
+h2.gender-heading {
+  position: relative;
+  top: 0;
+}
+
+
+/* Full-width white background behind the map */
+.map-background {
+  width: 100%;
+  background: white;
+  padding: 10px 0;
+  margin-top: -50px;
+  margin-bottom: 0;
+}
+
+/* Keep the map aligned with the rest of the page */
+.map-content {
+  width: min(1400px, 94%);
+  margin: 0 auto;
+}
+
+/* Make the Vega-Lite map responsive */
+#chart3 {
+  width: 100%;
+  min-width: 0;
+}
+
+#chart3 .vega-embed {
+  width: 100%;
+  padding: 0;
+}
+
+#chart3 .vega-embed > div {
+  width: 100%;
+}
+
+#chart3 svg,
+#chart3 canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+#chart3 .vega-embed {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#chart3 .vega-embed > div {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dumbbell-chart-container {
+  width: 100%;
+  margin-top: -75px;
+  margin-bottom: 35px;
+  padding: 0;
+}
+
+
+/* BOOK DISCOVERY SECTION */
+
+.discovery-visual-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 43fr) minmax(0, 57fr);
+  align-items: start;
+  gap: 30px;
+}
+
+/* Move paragraphs closer to the heading */
+.discovery-text {
+  padding-top: 20px;
+  margin-top: 0;
+}
+
+
+.chart-heading {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 27px;
+  font-weight: 600;
+  color: #252525;
+
+  border-left: 4px solid #b54b0b;
+  padding-left: 16px;
+
+  margin: 35px 0 20px;
+  line-height: 1.3;
+}
+
+.chart-heading-sec {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25px;
+  font-weight: 600;
+  color: #252525;
+
+  border-left: 4px solid #b54b0b;
+  padding-left: 16px;
+
+  margin: 35px 0 1px;
+  line-height: 1.3;
+}
+
+.chart-heading {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 27px;
+  font-weight: 600;
+  color: #252525;
+
+  border-left: 4px solid #b54b0b;
+  padding-left: 16px;
+
+  margin: 35px 0 20px;
+  line-height: 1.3;
+}
+
+
+
+/* Responsive layout */
+@media (max-width: 900px) {
+  .discovery-visual-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .discovery-chart-container {
+    transform: none;
+  }
+}
+
+
+.generation-visual-layout {
+  margin-bottom: -60px;
+}
+
+/* Reduce bottom spacing only for Section 01 */
+.map-section:has(#chart1) {
+  padding-bottom: 30px;
+}
+
+
+/* DUMBBELL CHART - FULL WIDTH */
+
+.dumbbell-chart-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 10px 0 30px;
+  padding: 0;
+}
+
+#chart2 {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}
+
+#chart2 .vega-embed {
+  width: 100%;
+  padding: 0;
+}
+
+#chart2 .vega-embed > div {
+  width: 100%;
+}
+
+
+
+/* ==========================================
+   CREDITS AND REFERENCES
+========================================== */
+
+/* Main heading - same font as Data Sources */
+.credits-section .credits-heading {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #252525;
+  line-height: 1.3;
+  margin: 0 0 30px;
+}
+
+/* Subheadings */
+.credits-section .subtitle-2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.credits-section .credits-author{
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+/* All smaller text */
+.credits-section .credits-intro,
+.credits-section .credits-list p,
+.credits-section .credits-list strong,
+.credits-section .credits-list a,
+.credits-section .credits-list span,
+
+.credits-section .credits-author strong,
+.credits-section .credits-author span {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* Source organisation names */
+.credits-section .credits-list strong {
+  font-weight: 600;
+}
+
+/* Keep source descriptions readable */
+.credits-section .credits-list span {
+  color: #68635e;
+}
+
+.credits-section {
+  border-top: 1px solid #c9c2b8;
+  padding-top: 50px;
+  margin-top: 40px;
+}
+
+/* Data Sources - Two Column Layout */
+.credits-section .credits-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(4, auto);
+  grid-auto-flow: column;
+  column-gap: 70px;
+  row-gap: 20px;
+  align-items: start;
+}
+
+/* Spacing between individual sources */
+.credits-section .credits-list p {
+  margin: 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .credits-section .credits-list {
+    display: block;
+  }
+
+  .credits-section .credits-list p {
+    margin-bottom: 20px;
+  }
+}
+
+.chart-source {
+  font-size: 13px;
+  color: #8e8277;
+  margin-top: 10px;
+  text-align: right;
+}
+
+.chart-source a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.orange-text {
+  color: #b8571a;
+  font-style: italic;
+}
+
+.section-divider {
+  width: 100%;
+  height: 1px;
+  border: none;
+  background-color: #d6d0c8;
+  margin: 30px auto 60px;
+}
+
+.intro-highlight {
+  font-weight: 700;
+  font-style: italic;
+  color: #8a4108;
+  background-color: #fbe2c9;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.fact-source {
+  display: block;
+  font-size: 15px;
+  font-weight: 400;
+  color: #e8d8ca;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/***
+**/
+/* ==========================================
+   LOLLIPOP CHART WHITE CONTAINER
+========================================== */
+
+
+.reading-chart-card {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+
+  padding: 0;
+  margin-bottom: 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.reading-chart-source {
+  margin: 12px 0 0;
+  padding-top: 10px;
+
+  border-top: 1px solid #ddd8d0;
+
+  font-size: 15px;
+  line-height: 1.5;
+  color: #645f5a;
+  text-align: left;
+  padding-bottom: 5%;
+}
+
+
+.reading-chart-source-other {
+  margin: 12px 0 0;
+  padding-top: 10px;
+
+  border-top: 1px solid #ddd8d0;
+
+  font-size: 15px;
+  line-height: 1.5;
+  color: #645f5a;
+  text-align: left;
+  padding-bottom: 0%;
+}
+
+.reading-chart-source-other a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.reading-chart-source-other a:hover {
+  text-decoration: underline;
+}
+
+
+.reading-chart-source a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.reading-chart-source a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+/* ==========================================
+   CONNECTED DOT PLOT — WHITE CONTAINER
+========================================== */
+
+.dumbbell-chart-container {
+  width: 100%;
+  max-width: none;
+
+  background: #ffffff;
+  border: 1px solid #e7e2dc;
+  border-radius: 12px;
+
+  padding: 30px 35px 20px;
+
+  margin: 25px 0 60px;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.025);
+}
+
+
+/* Vega-Lite chart */
+
+#chart2 {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+#chart2 .vega-embed {
+  width: 100%;
+}
+
+
+/* ==========================================
+   SOURCE CITATION
+========================================== */
+
+.dumbbell-chart-source {
+  margin: 25px 0 0;
+  padding: 15px 0 0;
+
+  border-top: 1px solid #eee9e3;
+
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+
+  color: #77716b;
+  text-align: left;
+}
+
+.dumbbell-chart-source a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.dumbbell-chart-source a:hover {
+  text-decoration: underline;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 700px) {
+  .dumbbell-chart-container {
+    padding: 20px 15px;
+    margin-bottom: 40px;
+  }
+
+  .dumbbell-chart-source {
+    font-size: 12px;
+  }
+}
+
+.map-highlight {
+  color: #b66b5d;
+  font-weight: 700;
+}
+
+
+.nsw-map-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 45px;
+}
+
+.nsw-council-panel {
+  width: 100%;
+  max-width: none;
+  justify-self: end;
+}
+
+@media (max-width: 1100px) {
+  .nsw-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .nsw-council-panel {
+    width: 100%;
+    justify-self: stretch;
+  }
+}
+
+.butterfly-source {
+  font-size: 13px;
+  color: #77716B;
+  text-align: center;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.nsw-highlight {
+  color: #2c6b92;
+  font-weight: 700;
+}
+
+
+.queensland-highlight {
+  color: #ad5516;
+  font-weight: 700;
+}
+
+.heatmap-highlight {
+  color: #823e0e;
+  font-weight: 700;
+}
+
+.map-source {
+  font-size: 13px;
+  color: #77716B;
+  margin-top: 1px;
+  text-align: center;
+  transform: translateY(-35px);
+}
+
+.discovery-chart-container {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+
+  background: #ffffff;
+  padding: 25px 20px;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transform: none;
+}
+
+
+
+
+
+/* BUMP CHART + ANNOTATION */
+
+.bump-chart-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Annotation below the colour legend */
+.bump-annotation {
+  position: absolute;
+  top: 200px;
+  right: 0;
+
+  width: 205px;
+  padding-left: 12px;
+
+  border-left: 3px solid #b54b0b;
+  box-sizing: border-box;
+}
+
+/* Annotation heading */
+.bump-annotation h4 {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #b54b0b;
+  line-height: 1.4;
+
+  margin: 0 0 10px;
+}
+
+/* Annotation paragraph */
+.bump-annotation p {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #514b46;
+
+  margin: 0;
+}
+
+/* Emphasise the ranking changes */
+.bump-annotation strong {
+  font-weight: 700;
+  color: #252525;
+}
+
+/* Prevent annotation overlap on smaller screens */
+@media (max-width: 1200px) {
+  .bump-annotation {
+    position: static;
+    width: auto;
+    max-width: 400px;
+    margin: 20px 0 0 auto;
+  }
+}

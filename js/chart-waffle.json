@@ -1,0 +1,181 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "data": {
+    "url": "data/library_membership.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.MembershipRate)",
+      "as": "Rate"
+    },
+    {
+      "calculate": "sequence(0, 100)",
+      "as": "Squares"
+    },
+    {
+      "flatten": ["Squares"]
+    },
+    {
+      "calculate": "datum.Squares % 10",
+      "as": "Column"
+    },
+    {
+      "calculate": "9 - floor(datum.Squares / 10)",
+      "as": "Row"
+    },
+    {
+      "calculate": "datum.Squares < round(datum.Rate) ? 'Member' : 'Not registered as a member'",
+      "as": "Status"
+    }
+  ],
+  "facet": {
+    "field": "State",
+    "type": "nominal",
+    "columns": 3,
+    "header": {
+      "title": null,
+      "labelFont": "Helvetica Neue",
+      "labelFontSize": 18,
+      "labelFontWeight": "bold",
+      "labelPadding": 15
+    }
+  },
+  "spacing": 45,
+  "spec": {
+    "width": 300,
+    "height": 300,
+    "layer": [
+      {
+        "mark": {
+          "type": "rect",
+          "stroke": "white",
+          "strokeWidth": 1,
+          "cornerRadius": 2
+        },
+        "encoding": {
+          "x": {
+            "field": "Column",
+            "type": "ordinal",
+            "axis": null
+          },
+          "y": {
+            "field": "Row",
+            "type": "ordinal",
+            "sort": "ascending",
+            "axis": null
+          },
+          "color": {
+            "field": "Status",
+            "type": "nominal",
+            "scale": {
+             "domain": ["Member", "Not registered as a member"],
+            "range": ["#AD3568", "#dcd3c8"]
+            },
+            "legend": {
+              "title": null,
+              "orient": "bottom",
+              "labelFontSize": 18,
+              "symbolSize": 200,
+              "labelLimit": 300,
+              "padding": 15,
+              "offset": 10
+            }
+          },
+          "tooltip": [
+            {
+              "field": "State",
+              "type": "nominal"
+            },
+            {
+              "field": "Rate",
+              "type": "quantitative",
+              "title": "Membership rate (%)",
+              "format": ".2f"
+            }
+          ]
+        }
+      },
+      
+{
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "max",
+          "field": "Rate",
+          "as": "DisplayRate"
+        }
+      ]
+    },
+    {
+     "calculate": "format(100 - datum.DisplayRate, '.0f') + '%'",
+    "as": "OtherLabel"
+    }
+  ],
+  "mark": {
+    "type": "text",
+    "font": "Helvetica Neue",
+    "fontSize": 38,
+    "fontWeight": "bold",
+    "color": "#000000",
+    "align": "center",
+    "baseline": "middle",
+    "x": 150,
+    "y": 85
+  },
+  "encoding": {
+    "text": {
+      "field": "OtherLabel",
+      "type": "nominal"
+    }
+  }
+},
+{
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "max",
+          "field": "Rate",
+          "as": "DisplayRate"
+        }
+      ]
+    },
+    {
+      "calculate": "format(datum.DisplayRate, '.0f') + '%'",    
+      "as": "MemberLabel"
+    }
+  ],
+  "mark": {
+    "type": "text",
+    "font": "Helvetica Neue",
+    "fontSize": 38,
+    "fontWeight": "bold",
+    "color": "white",
+    "align": "center",
+    "baseline": "middle",
+    "x": 150,
+    "y": 270
+  },
+  "encoding": {
+    "text": {
+      "field": "MemberLabel",
+      "type": "nominal"
+    }
+  }
+}
+
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Helvetica Neue"
+  }
+}

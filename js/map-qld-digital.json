@@ -1,0 +1,375 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "width": 350,
+  "height": 430,
+  "padding": {
+    "left": 45,
+    "right": 0,
+    "top": 5,
+    "bottom": 5
+  },
+  "data": {
+    "url": "data/qld_lga.json",
+    "format": {
+      "type": "topojson",
+      "feature": "Local_Government_Areas"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum.properties.lga == 'Moreton Bay City' ? 'Moreton Bay Regional Council' : datum.properties.lga == 'Southern Downs Regional' ? 'Southern Downs Regioinal Council' : datum.properties.lga == 'Weipa Town' ? 'Weipa Town Authority' : datum.properties.lga + ' Council'",
+      "as": "CouncilMatch"
+    },
+    {
+      "lookup": "CouncilMatch",
+      "from": {
+        "data": {
+          "url": "data/council-data-2024-2025-queensland-public-libraries-annual-statistics.csv"
+        },
+        "key": "COUNCIL",
+        "fields": [
+          "USAGE TOTAL PHYSICAL ITEMS",
+          "USAGE DIGITAL / ELECTRONIC COLLECTION USAGE",
+          "USAGE TOTAL CIRCULATION"
+        ]
+      }
+    },
+    {
+      "calculate": "toNumber(datum['USAGE TOTAL CIRCULATION']) > 0 ? toNumber(datum['USAGE DIGITAL / ELECTRONIC COLLECTION USAGE']) / toNumber(datum['USAGE TOTAL CIRCULATION']) * 100 : null",
+      "as": "DigitalShare"
+    },
+    {
+      "calculate": "isValid(datum.DigitalShare) && isFinite(datum.DigitalShare) ? (datum.DigitalShare < 20 ? '0–20%' : datum.DigitalShare < 40 ? '20–40%' : datum.DigitalShare < 60 ? '40–60%' : datum.DigitalShare < 80 ? '60–80%' : '80–100%') : null",
+      "as": "DigitalBand"
+    },
+    {
+      "calculate": "isValid(datum.DigitalShare) && isFinite(datum.DigitalShare) ? format(datum.DigitalShare, '.1f') + '%' : 'No data'",
+      "as": "DigitalShareLabel"
+    }
+  ],
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.7
+      },
+      "encoding": {
+        "color": {
+          "field": "DigitalBand",
+          "type": "ordinal",
+          "scale": {
+            "domain": [
+              "0–20%",
+              "20–40%",
+              "40–60%",
+              "60–80%",
+              "80–100%"
+            ],
+            "range": [
+              "#fdbb84",
+              "#fc9855",
+              "#f9782b",
+              "#cf3900",
+              "#7f1d00"
+            ],
+            "unknown": "#D9D9D9"
+          },
+          "legend": {
+            "title": [
+              "Digital loans",
+              "(% of total loans)"
+            ],
+            "orient": "left",
+            "direction": "vertical",
+            "labelFontSize": 14,
+            "titleFontSize": 15,
+            "symbolType": "square",
+            "symbolSize": 250
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.lga",
+            "type": "nominal",
+            "title": "Council"
+          },
+          {
+            "field": "USAGE TOTAL PHYSICAL ITEMS",
+            "type": "quantitative",
+            "title": "Physical item loans",
+            "format": ","
+          },
+          {
+            "field": "USAGE DIGITAL / ELECTRONIC COLLECTION USAGE",
+            "type": "quantitative",
+            "title": "Digital item loans",
+            "format": ","
+          },
+          {
+            "field": "DigitalShareLabel",
+            "type": "nominal",
+            "title": "Digital share of loans"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.properties.lga == 'Boulia Shire'"
+        },
+        {
+          "calculate": "geoCentroid(null, datum)[0]",
+          "as": "longitude"
+        },
+        {
+          "calculate": "geoCentroid(null, datum)[1]",
+          "as": "latitude"
+        },
+        {
+          "calculate": "datum.longitude - 3.0",
+          "as": "labelLongitude"
+        },
+        {
+          "calculate": "datum.latitude - 1.5",
+          "as": "labelLatitude"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "color": "#666666",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "longitude2": {
+          "field": "labelLongitude"
+        },
+        "latitude2": {
+          "field": "labelLatitude"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.properties.lga == 'Boulia Shire'"
+        },
+        {
+          "calculate": "geoCentroid(null, datum)[0]",
+          "as": "longitude"
+        },
+        {
+          "calculate": "geoCentroid(null, datum)[1]",
+          "as": "latitude"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "shape": "triangle",
+        "filled": true,
+        "size": 65,
+        "angle": 315,
+        "color": "#666666"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.properties.lga == 'Boulia Shire'"
+        },
+        {
+          "calculate": "geoCentroid(null, datum)[0] - 3.0",
+          "as": "labelLongitude"
+        },
+        {
+          "calculate": "geoCentroid(null, datum)[1] - 1.5",
+          "as": "labelLatitude"
+        },
+        {
+          "calculate": "['Highest digital share', 'Boulia Shire']",
+          "as": "Annotation"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -8,
+        "font": "Helvetica Neue",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "lineHeight": 15,
+        "color": "#252525"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "labelLongitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "labelLatitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Annotation",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.properties.lga == 'Croydon Shire'"
+        },
+        {
+          "calculate": "geoCentroid(null, datum)[0]",
+          "as": "longitude"
+        },
+        {
+          "calculate": "geoCentroid(null, datum)[1]",
+          "as": "latitude"
+        },
+        {
+          "calculate": "datum.longitude + 4.5",
+          "as": "labelLongitude"
+        },
+        {
+          "calculate": "datum.latitude + 2.0",
+          "as": "labelLatitude"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "color": "#666666",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "longitude2": {
+          "field": "labelLongitude"
+        },
+        "latitude2": {
+          "field": "labelLatitude"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.properties.lga == 'Croydon Shire'"
+        },
+        {
+          "calculate": "geoCentroid(null, datum)[0]",
+          "as": "longitude"
+        },
+        {
+          "calculate": "geoCentroid(null, datum)[1]",
+          "as": "latitude"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "shape": "triangle",
+        "filled": true,
+        "size": 65,
+        "angle": 225,
+        "color": "#666666"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.properties.lga == 'Croydon Shire'"
+        },
+        {
+          "calculate": "geoCentroid(null, datum)[0] + 4.5",
+          "as": "labelLongitude"
+        },
+        {
+          "calculate": "geoCentroid(null, datum)[1] + 2.0",
+          "as": "labelLatitude"
+        },
+        {
+          "calculate": "['Lowest digital share', 'Croydon Shire']",
+          "as": "Annotation"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 6,
+        "font": "Helvetica Neue",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "lineHeight": 15,
+        "color": "#252525"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "labelLongitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "labelLatitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Annotation",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelFontSize": 14,
+      "titleFontSize": 13,
+      "titleFontWeight": "bold"
+    }
+  }
+}

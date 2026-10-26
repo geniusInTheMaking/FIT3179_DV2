@@ -1,0 +1,1474 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Australia, Between the Pages</title>
+
+  <!-- Vega / Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+
+
+  <header class="hero">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <h1>Australia, Between the Pages</h1>
+
+      <p class="main-subtitle">
+        Exploring who reads, what Australians borrow, and how books connect communities.
+      </p>
+    </div>
+  </header>
+
+  <main>
+
+  
+
+    <!-- ========================================
+         SECTION 01 - THE PEOPLE BEHIND THE PAGES
+    ========================================= -->
+
+    <section class="intro">
+
+      <p class="section-label">Introduction</p>
+    
+      <!-- TWO-COLUMN INTRODUCTION -->
+      <div class="intro-text-grid">
+    
+        <!-- LEFT COLUMN -->
+        <div class="intro-column">
+    
+          <p class="intro-text">
+            <strong> Every page tells a story.</strong>
+            From magical worlds to gripping mysteries, books take us places 
+             and bring us together.
+         
+            But what gets Australia reading? 
+            Which genres appeal to different generations? 
+            And does where we live shape what we love to read?
+          
+          </p>
+    
+        </div>
+    
+
+        <div class="intro-column">
+          <p class="intro-text">
+            <span class="intro-highlight">Australia, Beyond the Pages</span>
+            explores how reading habits vary across Australian generations and communities. Using national reading trends and public library data, 
+            it reveals patterns in reading participation, library engagement, and book preferences.
+        </div>
+    
+      </div>
+    
+      <!-- KPI CARDS -->
+      <div class="fact-cards">
+    
+        <button class="fact-card" type="button"
+          onclick="toggleFact(this)"
+          aria-label="Discover reading participation fact">
+    
+          <div class="fact-front">
+            <span class="fact-title">Reading Insight 01</span>
+            <span class="fact-number">69% of people...</span>
+            <span class="click-text">Click to uncover the fact.</span>
+          </div>
+    
+          <div class="fact-back">
+            <span class="fact-description">
+              69% of Australians aged 15+ read at least one
+              book a month for pleasure.
+            </span>
+            <span class="click-text-return">Click to return</span>
+
+            <span class="fact-source">
+              Source: Australian Bureau of Statistics (2024)
+            </span>
+
+          </div>
+    
+        </button>
+    
+        <button class="fact-card" type="button"
+          onclick="toggleFact(this)"
+          aria-label="Discover Australian library visits fact">
+    
+          <div class="fact-front">
+            <span class="fact-title">Reading Insight 02</span>
+            <span class="fact-number">90.5 million visits...</span>
+            <span class="click-text">Click to uncover the fact.</span>
+          </div>
+    
+          <div class="fact-back">
+            <span class="fact-description">
+              Australians made 90.5 million in-person visits
+              to public libraries in 2024–25.
+            </span>
+            <span class="click-text-return">Click to return</span>
+
+            <span class="fact-source">
+              Source: Australian Bureau of Statistics (2024)
+            </span>
+          </div>
+    
+        </button>
+    
+        <button class="fact-card" type="button"
+          onclick="toggleFact(this)"
+          aria-label="Discover digital borrowing fact">
+    
+          <div class="fact-front">
+            <span class="fact-title">Reading Insight 03</span>
+            <span class="fact-number">32% digital loans</span>
+            <span class="click-text">Click to uncover the fact.</span>
+          </div>
+    
+          <div class="fact-back">
+            <span class="fact-description">
+              Digital borrowing accounted for 32% of all
+              Australian public-library loans in 2023–24.
+            </span>
+            <span class="click-text-return">Click to return</span>
+
+            <span class="fact-source">
+              Source: NSLA & ALIA (2023–24)
+            </span>
+
+
+          </div>
+    
+        </button>
+    
+      </div>
+    
+    </section>
+
+
+    <hr class="section-divider">
+
+    <section class="map-section">
+
+      <h2 class="section-label">
+        01 - The <span class="orange-text">People</span> Behind the Pages
+      </h2>
+
+      <div class="map-intro">
+        <p class="intro-text">
+          This section explore how age & gender influence reading habits. 
+           </p>
+      </div>
+      <h2 class="chart-heading">
+       The older we get, the more we read?
+      </h2>
+
+      <div class="map-intro">
+        <p class="intro-text">
+          Reading participation rises sharply across the age groups surveyed. 
+          Australians aged 78+ recorded a participation rate more than four times that of Gen Z, revealing a striking generational divide in leisure reading.
+      </div>
+
+      <div class="generation-visual-layout">
+
+        <div class="chart-container reading-chart-card">
+          <div id="chart1"></div>
+        
+          <p class="reading-chart-source">
+            Source:
+            <a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2024"
+               target="_blank" rel="noopener noreferrer">
+              Australian Bureau of Statistics (2024)
+            </a>
+          </p>
+        </div>
+
+
+
+        <aside class="generation-insight">
+
+          <div class="insight-header">
+            Is age really the reason?
+          </div>
+
+          <div class="insight-content">
+
+            <div class="insight-item">
+              <h3>More time for leisure</h3>
+
+              <p class = "intro-text-box">
+                Older Australians may have fewer work and
+                family commitments after retirement, creating
+                more time for leisure reading.
+              </p>
+            </div>
+
+            <div class="insight-item">
+              <h3>Different leisure habits</h3>
+
+              <p class = "intro-text-box">
+                Younger Australians divide their leisure time
+                between streaming, gaming, social media, and
+                other activities, while older generations may
+                spend more time reading.
+              </p>
+            </div>
+
+          </div>
+          
+        </aside>
+
+      </div>
+
+   
+      <h2 class="chart-heading">
+        Who spends longer reading: Men or Women?
+       </h2>
+
+      <div class="map-intro">
+        <p class="intro-text">
+          Women recorded longer average daily reading times across every generation surveyed. The widest difference appears among Millennials.
+        </p>
+
+        <p class="intro-text">
+          Statistics represent the average number of hours spent on leisure reading by male and female 
+          survey respondents.
+        </p>
+
+
+      </div>
+      
+      <!-- DUMBBELL CHART -->
+      <div class="dumbbell-chart-container">
+
+        <div id="chart2"></div>
+      
+        <p class="reading-chart-source-other">
+          Source:
+          <a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2024"
+             target="_blank" rel="noopener noreferrer">
+            Australian Bureau of Statistics (2024)
+          </a>
+        </p>
+      
+      </div>
+
+
+
+
+
+    <hr class="section-divider">
+
+      
+    <section class="map-section">
+
+      <h2 class="section-label">
+        02 - Reading Across <span class="orange-text">Communities</span>
+      </h2>
+
+
+     
+
+      <div class="map-intro">
+        <p class="intro-text">
+ 
+          Across Australia, public libraries connect communities with books, 
+          resources and shared spaces. Yet the ways people engage with these services 
+          differ from place to place.
+        </p>
+      
+        <p class="intro-text">
+          From library membership and borrowing activity to physical visits and digital collections, this chapter explores how public library engagement varies across Australian communities.
+        </p>
+  
+      </div>
+
+      <h2 class="chart-heading">
+        Does Library Membership Vary Across States?
+      </h2>
+    
+      <div class="map-intro">
+        <p class="intro-text">
+
+          Library membership rates vary across the three states, with <strong>New South Wales</strong> recording the highest rate<strong> (34%)</strong> & <strong>Western Australia </strong> the lowest <strong> (22%)</strong>. 
+          This <strong> 12% point gap  </strong> highlights differences in library registration
+         
+        
+        <p class="intro-text">
+           relative to population. However, membership does not capture all library use. 
+          Residents can still visit libraries for study, events and community services without being registered members.
+        </p>
+    
+      </div>
+
+
+      
+      <div id="chart-waffle"></div>
+      
+
+      
+      <h2 class="subtitle-2 map-subtitle-second">
+        Where Is Library Borrowing Strongest in NSW?
+      </h2>
+ 
+
+        <div class="map-visual-layout">
+
+       
+          <div class="map-text">
+            <p class="intro-text">
+              The <strong class="map-highlight">proportional symbol map</strong>
+              compares <strong class="map-highlight">library borrowings</strong>
+              across NSW councils. Circle size represents total loans,
+              while darker colours indicate more loans per resident.
+            </p>
+
+      
+            <p class="intro-text">
+              By accounting for population differences, loans per resident reveal borrowing intensity that total loan counts alone may hide. 
+              A council with fewer loans overall can still have higher borrowing activity relative to its population.
+                </p>
+
+              <p class="intro-text">
+                <strong><em>Hover over the circles to explore individual councils!</em></strong>
+              </p>
+
+              <p class="reading-chart-source-other">
+                Source: State Library of NSW,
+                <em>NSW Public Library Statistics, 2024–25</em>;
+                council boundaries: ABS.
+              </p>
+
+             
+
+          </div>
+
+          <section class="map-background">
+          <div class="map-chart-container">
+            <div id="chart3"></div>
+
+            
+          </div>
+          
+        </section>
+
+
+
+
+        </div>
+
+        
+
+        <!-- NSW LINKED DOT MAP -->
+
+<!-- ========================================
+     NSW LINKED DOT MAP
+========================================= -->
+
+<h2 class="chart-heading">
+  Where Are NSW Libraries Most Visited?
+</h2>
+
+
+
+<div class="map-intro">
+
+
+  <p class="intro-text">
+
+    The <span class="nsw-highlight">dot map  </span>represents <span class="nsw-highlight">library visits across NSW councils </span>  in  <span class="nsw-highlight">2024 to 2025</span> . 
+    It highlights how frequently communities use library spaces.
+
+    
+    Visits are concentrated around Sydney and coastal NSW, reflecting higher
+
+    </p>
+
+
+  <p class="intro-text-2">
+
+       population density and library accessibility. However, total visits do not indicate engagement per resident, particularly in smaller regional communities.
+     <strong><em> Click a council to see the statistics closer! </em> </strong>
+  </p>
+  
+
+</div>
+
+
+
+<div class="nsw-map-layout">
+
+  <!-- LEFT: FULL NSW MAP -->
+  <section class="nsw-main-map">
+    <div class="nsw-dot-legend">
+      <span class="nsw-legend-dot"></span>
+      <span>1 dot = 10,000 physical library visits (2024–25)</span>
+    </div>
+    <div id="map-nsw"></div>
+    
+
+  </section>
+
+
+  <!-- RIGHT: ZOOMED COUNCIL MAP -->
+  <aside class="nsw-council-panel">
+
+    <h3>Explore a Council</h3>
+
+    <p id="selected-council-name">
+      Select a council on the map
+    </p>
+
+    <div id="council-zoom"></div>
+
+    <div class="council-stats">
+      <span>Total physical visits</span>
+
+      <strong id="council-total-visits">
+        —
+      </strong>
+    </div>
+
+    <p class="council-legend">
+      ● 1 dot = 10,000 visits
+    </p>
+
+  </aside>
+
+</div>
+
+
+
+
+
+
+<!-- QUEENSLAND DIGITAL BORROWING -->
+
+<h2 class="chart-heading-sec">
+  How Digital Is Library Borrowing in Queensland?
+</h2>
+
+
+  <div class="map-visual-layout">
+
+  <!-- LEFT: EXPLANATORY TEXT -->
+  <div class="map-text">
+
+    <p class="intro-text">
+     
+      The <span class = "queensland-highlight">choropleth map </span>  compares the <span class = "queensland-highlight">percentage of library borrowing conducted digitally </span> across Queensland councils in 2024–25.
+          </p>
+
+    <p class="intro-text">
+      These differences may reflect library accessibility, internet connectivity and local preferences. 
+      Digital borrowing may be especially valuable in communities with limited access to physical libraries.
+    </p>
+
+    <p class="intro-text">
+      However, a higher digital percentage does not indicate greater overall library use, 
+      as it reflects the share of borrowing rather than total loan volumes.
+    </p>
+
+  </div>
+  <div class="qld-map-background">
+
+  <!-- RIGHT: CHOROPLETH MAP -->
+  <div class="map-chart-container-2">
+    <div id="map-qld-digital"></div>
+
+    <p class="reading-chart-source-other">
+        
+      Source: Queensland Government, 
+      <em>Queensland Public Libraries Annual Statistics, 2024–25.</em>
+  
+    </p>
+  </div>
+
+
+
+ 
+
+</div>
+</div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="map-section">
+
+      <h2 class="section-label">
+        03 - The <span class="orange-text">Books</span> We Choose 
+      </h2>
+
+      
+
+      <div class="map-intro">
+        <p class="intro-text">
+          Beyond library engagement, the books Australians choose reveal diverse interests and reading preferences. 
+        </p>
+      
+        <p class="intro-text">
+          This chapter explores what Australians read, how preferences differ across audiences, and how borrowing trends change over time.
+        </p>
+      </div>
+
+
+      <h2 class="chart-heading-sec">
+  What Types of Literature Do Australians Read?
+</h2>
+
+<div class="bar-chart-layout">
+
+  <!-- TEXT ON THE LEFT -->
+  <div class="bar-chart-text">
+
+    <p class="intro-text">
+      Novels are the most widely read category, suggesting that storytelling and entertainment remain key reading motivations among Australians.</p>
+
+    <p class="intro-text">
+      Crime and creative non-fiction also attract substantial readership, suggesting that Australians value books for exploring real-world events, understanding human behaviour and gaining insights from personal experiences.  </p>
+
+    <p class="intro-text">
+      Comics and poetry attract smaller audiences, potentially reflecting more specialised interests rather than a lack of cultural significance. </p>
+
+  </div>
+
+
+  <div class="bar-chart-container">
+    <div id="chart-bar"></div>
+
+    <p class="reading-chart-source-other">
+        
+      Obtained data from Source:
+      <a href="https://creative.gov.au/research/creative-transformations-results-national-arts-participation-survey"
+         target="_blank" rel="noopener noreferrer">
+        Creative Australia (2025), National Arts Participation Survey
+      </a>.
+      Visualisation by author.
+  
+    </p>
+
+  
+    
+     
+    </p>
+  </div>
+
+
+</div>
+
+<h2 class="chart-heading-sec">
+  Do Different Audiences Borrow Different Books?
+</h2>
+
+<div class="bar-chart-layout">
+
+  <!-- TEXT ON THE LEFT -->
+  <div class="bar-chart-text">
+
+    <p class="intro-text">
+     
+       The heatmap compares the <span class="heatmap-highlight"> percentage share </span> of selected library checkouts across  <span class="heatmap-highlight">juveniles, young adults and adults </span> in Brisbane public libraries.
+    </p>
+
+    <p class="intro-text">
+      Younger readers may prefer picture books and graphic novels, while older readers may choose more fiction and non-fiction.
+      These differences show how public libraries cater to different age groups by offering a wide range of reading materials.
+     </p>
+
+    <p class="intro-text">
+      <strong> <em>Hover over each cell to explore checkout counts.</em> </strong> 
+    </p>
+
+    <p class="reading-chart-source-other">
+      
+      Source: Brisbane City Council,
+      <em>Library Checkout Data, 2024–2026.</em>
+    </p>
+
+  </div>
+
+ 
+
+  <div class="bar-chart-container">
+    <div id="chart-heatmap"></div>
+  </div>
+
+</div>
+
+<h2 class="chart-heading">
+  Reading Beyond English
+</h2>
+
+
+
+
+
+
+
+<div class="butterfly-visual-layout">
+
+
+  <div class="butterfly-text">
+
+    <p class="intro-text">
+      Australia's cultural diversity is reflected in the range of languages available in public libraries. 
+      This butterfly chart <strong> compares book checkouts across five languages</strong> in 2024 and 2026, highlighting changes in borrowing preferences.
+    </p>
+
+    <p class="intro-text">
+      Chinese-language books recorded the highest checkout
+      numbers among these five languages in both years,
+      while Spanish and Korean were the only languages
+      to record increases.
+    </p>
+
+    <p class="reading-chart-source-other">
+      
+      Source: Brisbane City Council,
+      <em>Library Checkout Data, 2024–2026.</em>
+    </p>
+
+  </div>
+
+  <!-- BUTTERFLY CHART ON THE RIGHT -->
+  <div class="butterfly-chart-container">
+    <div id="chart-language-butterfly"></div>
+  </div>
+
+  
+</div>
+
+
+<!-- <div class="bar-chart-container">
+  <div id="chart-bar"></div>
+
+  <p class="reading-chart-source-other">
+      
+    Obtained data from Source:
+    <a href="https://creative.gov.au/research/creative-transformations-results-national-arts-participation-survey"
+       target="_blank" rel="noopener noreferrer">
+      Creative Australia (2025), National Arts Participation Survey
+    </a>.
+    Visualisation by author.
+
+  </p>
+
+
+  
+   
+  </p>
+</div> -->
+
+
+<h2 class="chart-heading">
+  Which Collections Rise and Fall in Popularity?
+</h2>
+
+<div class="map-intro">
+  <p class="intro-text">
+    Borrowing preferences change over time as different book categories rise and fall in popularity across NSW public libraries. 
+    This animated bump chart tracks changes in category rankings, highlighting shifts in reader preferences.
+ </p>
+
+  <p class="intro-text">
+    These changes may reflect changing reading interests, collection availability or borrowing habits.
+    Click <strong>  "Play Animation" </strong> to explore ranking changes over time, or select a specific year to compare categories.</p>
+</div>
+
+
+<!-- BUMP CHART -->
+<div class="bump-chart-section">
+
+ 
+<div class="bump-chart-wrapper">
+
+  <div id="chart-bump"></div>
+
+  <div class="bump-annotation">
+    <h4>A SHIFT IN BORROWING RANKINGS</h4>
+
+    <p>
+      Young Adult Fiction climbed from
+      <strong>3rd to 1st place</strong>,
+      while Junior Non-Fiction dropped from
+      <strong>1st to 8th</strong>
+      between 2021–22 and 2024–25.
+    </p>
+  </div>
+
+</div>
+
+  <!-- ANIMATION CONTROLS -->
+  <div class="bump-controls">
+
+    <div class="bump-control-heading">
+      Explore how rankings changed over time
+    </div>
+
+    <div class="bump-button-row">
+
+      <button id="bump-play" class="bump-btn bump-primary">
+        ▶ Play Animation
+      </button>
+
+      <button id="bump-all" class="bump-btn">
+        Show All
+      </button>
+
+      <button class="bump-btn bump-year" data-year="1">
+        2022–23
+      </button>
+
+      <button class="bump-btn bump-year" data-year="2">
+        2023–24
+      </button>
+
+      <button class="bump-btn bump-year" data-year="3">
+        2024–25
+      </button>
+
+
+    </div>
+    
+
+
+  </div>
+
+</div>
+
+<hr class="section-divider">
+
+<h2 class="section-label">
+  04 - How Do Australians <span class="orange-text">Discover</span> Books?
+</h2>
+
+<div class="map-intro">
+  <p class="intro-text">
+    Book choices are influenced by how readers discover new stories, from personal recommendations and bookshops to libraries and social media. </p>
+
+  <p class="intro-text">
+    As digital platforms reshape book discovery, do traditional recommendations still hold more influence than online sources?
+  </p>
+</div>
+
+<h2 class="chart-heading">
+  Where Do Australians Find Their Next Read?
+</h2>
+
+<div class="butterfly-visual-layout discovery-visual-layout">
+
+
+  <div class="butterfly-text">
+
+ 
+
+    <p class="intro-text">
+      The popularity of word of mouth may reflect readers' preference for recommendations from people who understand their interests. Unlike social media, where book suggestions compete with large volumes of content, personal recommendations can offer a more targeted approach to discovery. 
+      This suggests that trust and personal relevance may matter more than online visibility when choosing what to read next.  </p>
+
+    <p class="intro-text">
+     
+      Respondents could select multiple discovery methods, so percentages do not add up to 100%.
+    
+    </p>
+
+    <p class="reading-chart-source-other">
+      
+      Source: Creative Australia,
+      <em>National Arts Participation Survey (2025)</em>.
+    </p>
+
+  </div>
+
+  <!-- CHART ON THE RIGHT -->
+
+  <div class="butterfly-chart-container">
+    <div id="chart-discovery"></div>
+  </div>
+
+  
+
+    
+  </div>
+
+
+
+<hr class="section-divider">
+
+
+<h2 class="section-label">
+  Conclusion 
+</h2>
+
+
+<div class="map-intro">
+  <p class="intro-text">
+    Australia's reading habits are changing, but the importance of reading extends beyond the books themselves. From older generations showing greater reading participation 
+    to word of mouth influencing <strong>39% of book discoveries</strong>, the data reveals how age and personal connections shape reading choices.
+    </p>
+
+  <p class="intro-text">
+    Meanwhile, libraries continue to connect communities through both physical and digital services.
+    Together, these patterns suggest that the future of reading is not simply about choosing between 
+    print and digital, but about making books accessible and meaningful to different generations and communities.
+
+  </p>
+</div>
+
+
+    </section>
+
+
+<section class="credits-section">
+
+  <h2 class="subtitle-2">Author
+
+    
+  </h2>
+
+  <div class="credits-list">
+    <p>
+      <strong>Gayathri Maheswaran </strong> |  ID: 35352272 | FIT3179 | 25 October, 2026 | 10:30 pm 
+    </p>
+    
+  </div>
+
+
+  <h2 class="subtitle-2">Data Sources</h2>
+  <div class="credits-list">
+
+    <p>
+      <strong>Australian Bureau of Statistics</strong>
+      <a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2024"
+         target="_blank" rel="noopener noreferrer">
+        How Australians Use Their Time, 2024
+      </a>
+      <span>Reading participation and time use</span>
+    </p>
+
+    <p>
+      <strong>Creative Australia</strong>
+      <a href="https://creative.gov.au/research/creating-value-results-national-arts-participation-survey"
+         target="_blank" rel="noopener noreferrer">
+        Creating Value: National Arts Participation Survey, 2024
+      </a>
+      <span>Reading and literature preferences</span>
+    </p>
+
+    
+    <p>
+      <strong>Creative Australia</strong>
+      <a href="https://creative.gov.au/research/creative-transformations-results-national-arts-participation-survey"
+         target="_blank" rel="noopener noreferrer">
+        Creative Transformations: National Arts Participation Survey, 2025
+      </a>
+      <span>Book discovery methods</span>
+    </p>
+
+    <p>
+      <strong>NSLA & ALIA</strong>
+      <a href="https://www.alia.org.au/Web/News/Articles/2025/October-2025-/APLSR_released.aspx"
+         target="_blank" rel="noopener noreferrer">
+        Australian Public Libraries Statistical Report, 2023–24
+      </a>
+      <span>National library statistics</span>
+    </p>
+
+    <p>
+      <strong>State Library of New South Wales</strong>
+      <a href="https://pls.sl.nsw.gov.au/managing-my-library/public-library-statistics"
+         target="_blank" rel="noopener noreferrer">
+        NSW Public Library Statistics, 2021–22 to 2024–25
+      </a>
+      <span>Library visits, loans and collections</span>
+    </p>
+
+    <p>
+      <strong>State Library of Queensland</strong>
+      <a href="https://www.data.qld.gov.au/dataset/slq-qld-public-libraries-annual-statistics"
+         target="_blank" rel="noopener noreferrer">
+        Queensland Public Libraries Annual Statistics, 2024–25
+      </a>
+      <span>Physical and digital circulation</span>
+    </p>
+
+    <p>
+      <strong>Brisbane City Council</strong>
+      <a href="https://data.brisbane.qld.gov.au/explore/dataset/library-checkouts-2025"
+         target="_blank" rel="noopener noreferrer">
+        Library Checkouts, 2025
+      </a>
+      <a href="https://data.brisbane.qld.gov.au/explore/dataset/library-checkouts-2026"
+         target="_blank" rel="noopener noreferrer">
+        Library Checkouts, 2026
+      </a>
+      <span>Checkout categories and languages</span>
+    </p>
+
+    <p>
+      <strong>Australian Bureau of Statistics</strong>
+      <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files"
+         target="_blank" rel="noopener noreferrer">
+        Australian Statistical Geography Standard
+      </a>
+      <span>Local Government Area boundaries</span>
+    </p>
+
+    
+  </div>
+</section>
+
+  </main>
+
+
+  <!-- ==========================================
+       INTERACTIVE FACT CARDS
+  =========================================== -->
+
+  <script>
+    function toggleFact(card) {
+      card.classList.toggle("active");
+    }
+  </script>
+
+
+
+
+  <script>
+    vegaEmbed("#chart1", "js/chart1.json", {
+      actions: false
+    })
+      .then(() => {
+        console.log("Visualization 1 loaded successfully");
+      })
+      .catch((error) => {
+        console.error("Error loading Visualization 1:", error);
+      });
+  </script>
+
+
+
+<script>
+  vegaEmbed("#map-qld-digital", "js/map-qld-digital.json", {
+    actions: false
+  })
+  .then(() => {
+    console.log("Queensland digital map loaded successfully");
+  })
+  .catch(error => {
+    console.error("Error loading Queensland digital map:", error);
+  });
+</script>
+
+
+
+  <script>
+    vegaEmbed("#chart2", "js/chart2.json", {
+      actions: false
+    })
+      .then(() => {
+        console.log("Visualization 2 loaded successfully");
+      })
+      .catch((error) => {
+        console.error("Error loading Visualization 2:", error);
+      });
+  </script>
+
+  <script>
+    vegaEmbed("#chart-bar", "js/chart-bar.json", {
+  actions: false
+})
+  .catch(console.error);
+  </script>
+
+
+
+<script>
+  vegaEmbed("#chart3", "js/map1.json", {
+    actions: false
+  })
+    .then(() => {
+      console.log("Map loaded successfully");
+    })
+    .catch((error) => {
+      console.error("Error loading map:", error);
+    });
+</script>
+
+<script>
+  vegaEmbed("#chart-waffle", "js/chart-waffle.json", {
+    actions: false
+  })
+  .then(() => {
+    console.log("Waffle chart loaded successfully.");
+  })
+  .catch(error => {
+    console.error("Error loading waffle chart:", error);
+  });
+</script>
+
+<script>
+  vegaEmbed("#chart-language-butterfly","js/chart-language-butterfly.json",
+  { actions: false }
+).catch(console.error);
+</script>
+
+
+<script>
+  vegaEmbed("#chart-heatmap", "js/chart-heatmap.json", {
+    actions: false
+  })
+    .then(() => {
+      console.log("Heatmap loaded successfully.");
+    })
+    .catch((error) => {
+      console.error("Error loading heatmap:", error);
+    });
+</script>
+
+<script>
+  vegaEmbed("#chart-discovery", "js/chart-discovery.json", {
+    actions: false
+  })
+  .then(() => {
+    console.log("Discovery bubble chart loaded successfully.");
+  })
+  .catch(error => {
+    console.error("Error loading discovery chart:", error);
+  });
+</script>
+
+
+
+<script>
+  (async function () {
+  
+    const playButton = document.getElementById("bump-play");
+    const allButton = document.getElementById("bump-all");
+    const yearButtons = document.querySelectorAll(".bump-year");
+    const status = document.getElementById("bump-status");
+  
+    const years = [
+      "2021–22",
+      "2022–23",
+      "2023–24",
+      "2024–25"
+    ];
+  
+    let animationTimer = null;
+    let view = null;
+  
+    try {
+  
+      const result = await vegaEmbed(
+        "#chart-bump",
+        "js/chart-bump.json",
+        {
+          actions: false,
+          renderer: "svg"
+        }
+      );
+  
+      view = result.view;
+  
+
+      function stopAnimation() {
+        if (animationTimer !== null) {
+          clearTimeout(animationTimer);
+          animationTimer = null;
+        }
+  
+        playButton.disabled = false;
+        playButton.textContent = "▶ Play Animation";
+      }
+  
+
+      function highlightYear(index) {
+        yearButtons.forEach(button => {
+          button.classList.toggle(
+            "active",
+            Number(button.dataset.year) === index
+          );
+        });
+      }
+  
+      // Update the visible portion of the bump chart
+      async function showYear(index) {
+  await view.signal("visibleYear", index).runAsync();
+
+  highlightYear(index);
+}
+  
+      // Play animation
+      playButton.addEventListener("click", async () => {
+  
+        stopAnimation();
+  
+        playButton.disabled = true;
+        playButton.textContent = "Playing...";
+  
+        let currentYear = 0;
+  
+        await showYear(currentYear);
+  
+        function nextFrame() {
+  
+          animationTimer = setTimeout(async () => {
+  
+            currentYear++;
+  
+            if (currentYear <= 3) {
+              await showYear(currentYear);
+  
+              if (currentYear < 3) {
+                nextFrame();
+              } else {
+                stopAnimation();
+              }
+            }
+  
+          }, 2000);
+        }
+  
+        nextFrame();
+  
+      });
+  
+      // Show entire chart
+      allButton.addEventListener("click", async () => {
+        stopAnimation();
+        await showYear(3);
+      });
+  
+      // Individual year buttons
+      yearButtons.forEach(button => {
+  
+        button.addEventListener("click", async () => {
+  
+          stopAnimation();
+  
+          const selectedYear = Number(button.dataset.year);
+  
+          await showYear(selectedYear);
+  
+        });
+  
+      });
+  
+      // Default: show all years
+      await showYear(3);
+  
+    } catch (error) {
+      console.error("Error loading bump chart:", error);
+      status.textContent = "Unable to load the bump chart.";
+    }
+  
+  })();
+  </script>
+  
+
+
+  <script>
+    (async function initialiseNSWMap() {
+      const TOPO_URL = "data/nsw_lga.json";
+      const DOTS_URL = "data/nsw_library_visit_dots.csv";
+      const FEATURE_NAME = "LGA_2025_AUST_GDA94";
+    
+      let mainView;
+      let selectedFeature = null;
+      let selectedName = null;
+    
+      const numberFormat = new Intl.NumberFormat("en-AU");
+    
+      // Standardise names across CSV and geographic data.
+      function normaliseName(value) {
+        return String(value ?? "")
+          .toLowerCase()
+          .replace(/\([^)]*\)/g, " ")
+          .replace(/\bcity council\b/g, " ")
+          .replace(/\bregional council\b/g, " ")
+          .replace(/\bmunicipal council\b/g, " ")
+          .replace(/\bcouncil\b/g, " ")
+          .replace(/\bcity\b/g, " ")
+          .replace(/\bshire\b/g, " ")
+          .replace(/\bmunicipality\b/g, " ")
+          .replace(/[^a-z0-9]/g, "");
+      }
+    
+      function getCouncilName(properties = {}) {
+        const candidates = [
+          "LGA_NAME25",
+          "LGA_NAME24",
+          "LGA_NAME23",
+          "LGA_NAME21",
+          "LGA_NAME",
+          "Council",
+          "NAME"
+        ];
+    
+        for (const key of candidates) {
+          if (properties[key]) {
+            return String(properties[key]);
+          }
+        }
+    
+        return null;
+      }
+    
+      // Convert TopoJSON into actual council features.
+      const [topology, csvRows] = await Promise.all([
+        fetch(TOPO_URL).then(r => {
+          if (!r.ok) throw new Error("Cannot load NSW TopoJSON");
+          return r.json();
+        }),
+        fetch(DOTS_URL).then(r => {
+          if (!r.ok) throw new Error("Cannot load NSW dots CSV");
+          return r.text();
+        })
+      ]);
+    
+      const topoObject = topology.objects[FEATURE_NAME];
+    
+      if (!topoObject) {
+        throw new Error("TopoJSON feature object not found");
+      }
+    
+      const features = topojson.feature(
+        topology,
+        topoObject
+      ).features.filter(feature =>
+        feature.properties?.STE_NAME21 === "New South Wales" &&
+        feature.geometry
+      );
+    
+      const dots = vega.read(csvRows, {
+        type: "csv",
+        parse: {
+          Longitude: "number",
+          Latitude: "number",
+          CouncilTotalVisits: "number"
+        }
+      });
+    
+      // Build a council lookup.
+      const councils = new Map();
+    
+      for (const feature of features) {
+        const name = getCouncilName(feature.properties);
+    
+        if (name) {
+          councils.set(normaliseName(name), feature);
+        }
+      }
+    
+      function findCouncil(name) {
+        return councils.get(normaliseName(name)) || null;
+      }
+    
+      // Show selected council in the right panel.
+      async function selectCouncil(feature) {
+        const name = getCouncilName(feature.properties);
+    
+        if (!name) return;
+    
+        selectedFeature = feature;
+        selectedName = name;
+    
+        const key = normaliseName(name);
+    
+        const councilDots = dots.filter(
+          row => normaliseName(row.Council) === key
+        );
+    
+        const totalVisits = councilDots.length
+          ? Number(councilDots[0].CouncilTotalVisits)
+          : null;
+    
+        document.getElementById(
+          "selected-council-name"
+        ).textContent = name;
+    
+        document.getElementById(
+          "council-total-visits"
+        ).textContent = Number.isFinite(totalVisits)
+          ? numberFormat.format(totalVisits)
+          : "Data unavailable";
+    
+        // Highlight the boundary on the main map.
+        const changes = vega.changeset()
+          .remove(() => true)
+          .insert([feature]);
+    
+        await mainView.change(
+          "selectedBoundary",
+          changes
+        ).runAsync();
+    
+        // Create a fitted council map.
+        const zoomSpec = {
+          "$schema":
+            "https://vega.github.io/schema/vega-lite/v5.json",
+    
+          "width": 340,
+          "height": 350,
+          "background": null,
+          "padding": 12,
+    
+          "projection": {
+            "type": "mercator",
+            "fit": feature
+          },
+    
+          "layer": [
+            {
+              "data": {
+                "values": [feature]
+              },
+              "mark": {
+                "type": "geoshape",
+                "fill": "#e6eef3",
+                "stroke": "#3274a1",
+                "strokeWidth": 1.8
+              }
+            },
+            {
+              "data": {
+                "values": councilDots
+              },
+              "mark": {
+                "type": "circle",
+                "size": 35,
+                "opacity": 0.7,
+                "color": "#3274a1",
+                "stroke": "white",
+                "strokeWidth": 0.5
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "Longitude",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "Latitude",
+                  "type": "quantitative"
+                },
+                "tooltip": [
+                  {
+                    "field": "Council",
+                    "type": "nominal",
+                    "title": "Council"
+                  },
+                  {
+                    "field": "CouncilTotalVisits",
+                    "type": "quantitative",
+                    "title": "Total visits",
+                    "format": ","
+                  },
+                  {
+                    "field": "DotVisits",
+                    "type": "nominal",
+                    "title": "Each dot"
+                  }
+                ]
+              }
+            }
+          ],
+    
+          "config": {
+            "view": {
+              "stroke": null
+            }
+          }
+        };
+    
+        await vegaEmbed("#council-zoom", zoomSpec, {
+          actions: false,
+          renderer: "svg"
+        });
+    
+        if (councilDots.length === 0) {
+          document.getElementById(
+            "council-total-visits"
+          ).textContent = "No matching visit data";
+        }
+      }
+    
+      // Render main NSW map.
+      const result = await vegaEmbed(
+        "#map-nsw",
+        "js/map-nsw.json",
+        {
+          actions: false,
+          renderer: "svg"
+        }
+      );
+    
+      mainView = result.view;
+    
+      // Read the clicked Vega scenegraph item.
+      function getClickedDatum(item) {
+        let datum = item?.datum;
+    
+        // Some scenegraph marks wrap the source datum.
+        for (let i = 0; i < 4; i++) {
+          if (!datum) return null;
+    
+          if (datum.properties || datum.Council) {
+            return datum;
+          }
+    
+          datum = datum.datum;
+        }
+    
+        return null;
+      }
+    
+      mainView.addEventListener("click", async (event, item) => {
+        const datum = getClickedDatum(item);
+    
+        if (!datum) return;
+    
+        let feature = null;
+    
+        if (datum.properties) {
+          const name = getCouncilName(datum.properties);
+          feature = findCouncil(name);
+        } else if (datum.Council) {
+          feature = findCouncil(datum.Council);
+        }
+    
+        if (!feature) return;
+    
+        try {
+          await selectCouncil(feature);
+        } catch (error) {
+          console.error("Council zoom failed:", error);
+        }
+      });
+    
+      console.log(
+        "NSW linked map loaded:",
+        features.length,
+        "councils"
+      );
+    
+    })().catch(error => {
+      console.error("NSW map loading failed:", error);
+    });
+    </script>
+
+
+</body>
+</html>

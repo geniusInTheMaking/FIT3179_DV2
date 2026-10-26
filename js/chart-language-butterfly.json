@@ -1,0 +1,295 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "padding": {
+    "left": 30,
+    "right": 5,
+    "top": 5,
+    "bottom": 5
+  },
+  "data": {
+    "url": "data/language_checkouts.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "spacing": 2,
+  "transform": [
+    {
+      "calculate": "toNumber(datum.Year)",
+      "as": "YearNum"
+    },
+    {
+      "calculate": "toNumber(datum.Checkouts)",
+      "as": "Count"
+    }
+  ],
+  "hconcat": [
+    {
+      "width": 290,
+      "height": 400,
+      "title": {
+        "text": "2024",
+        "color": "#B84D59",
+        "fontSize": 15
+      },
+      "transform": [
+        {
+          "filter": "datum.YearNum == 2024"
+        }
+      ],
+      "encoding": {
+        "y": {
+          "field": "Language",
+          "type": "nominal",
+          "sort": [
+            "Chinese",
+            "Japanese",
+            "French",
+            "Spanish",
+            "Korean"
+          ],
+          "axis": null
+        },
+        "x": {
+          "field": "Count",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 7000],
+            "reverse": true
+          },
+          "axis": {
+            "title": "Checkouts",
+            "values": [0, 2000, 4000, 6000],
+            "format": ",d",
+            "grid": true
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Language"
+          },
+          {
+            "field": "YearNum",
+            "title": "Year"
+          },
+          {
+            "field": "Count",
+            "title": "Checkouts",
+            "format": ",d"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "bar",
+            "color": "#B84D59",
+            "cornerRadiusEnd": 3
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "dx": -7,
+            "fontSize": 15,
+            "fontWeight": "bold",
+            "color": "#333333"
+          },
+          "encoding": {
+            "text": {
+              "field": "Count",
+              "type": "quantitative",
+              "format": ",d"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 80,
+      "height": 400,
+      "data": {
+        "values": [
+          {
+            "Language": "Chinese"
+          },
+          {
+            "Language": "Japanese"
+          },
+          {
+            "Language": "French"
+          },
+          {
+            "Language": "Spanish"
+          },
+          {
+            "Language": "Korean"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "align": "center"
+      },
+      "encoding": {
+        "y": {
+          "field": "Language",
+          "type": "nominal",
+          "sort": [
+            "Chinese",
+            "Japanese",
+            "French",
+            "Spanish",
+            "Korean"
+          ],
+          "axis": null
+        },
+        "x": {
+          "value": 47
+        },
+        "text": {
+          "field": "Language"
+        }
+      }
+    },
+    {
+      "width": 290,
+      "height": 400,
+      "title": {
+        "text": "2026",
+        "color": "#7a3a98",
+        "fontSize": 15
+      },
+      "transform": [
+        {
+          "filter": "datum.YearNum == 2026"
+        }
+      ],
+      "encoding": {
+        "y": {
+          "field": "Language",
+          "type": "nominal",
+          "sort": [
+            "Chinese",
+            "Japanese",
+            "French",
+            "Spanish",
+            "Korean"
+          ],
+          "axis": null
+        },
+        "x": {
+          "field": "Count",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 7000]
+          },
+          "axis": {
+            "title": "Checkouts",
+            "values": [0, 2000, 4000, 6000],
+            "format": ",d",
+            "grid": true
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Language"
+          },
+          {
+            "field": "YearNum",
+            "title": "Year"
+          },
+          {
+            "field": "Count",
+            "title": "Checkouts",
+            "format": ",d"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "bar",
+            "color": "#7a3a98",
+            "cornerRadiusEnd": 3
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 7,
+            "fontSize": 15,
+            "fontWeight": "bold",
+            "color": "#333333"
+          },
+          "encoding": {
+            "text": {
+              "field": "Count",
+              "type": "quantitative",
+              "format": ",d"
+            }
+          }
+        },
+        
+{
+  "transform": [
+    {
+      "filter": "datum.Language == 'French' || datum.Language == 'Spanish'"
+    },
+    {
+      "calculate": "datum.Language == 'French' ? '−55% compared to 2024' : '+15% compared to 2024'",
+      "as": "ChangeLabel"
+    },
+    {
+      "calculate": "datum.Language == 'French' ? '#C0392B' : '#27864B'",
+      "as": "AnnotationColor"
+    }
+  ],
+  "mark": {
+    "type": "text",
+    "align": "left",
+    "baseline": "middle",
+    "dx": 55,
+    "fontSize": 14,
+    "fontWeight": "bold"
+  },
+  "encoding": {
+    "text": {
+      "field": "ChangeLabel",
+      "type": "nominal"
+    },
+    "color": {
+      "field": "AnnotationColor",
+      "type": "nominal",
+      "scale": null,
+      "legend": null
+    }
+  }
+}
+
+      ]
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "y": "shared",
+      "x": "independent"
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 18
+    },
+    "font": "Arial"
+  }
+}

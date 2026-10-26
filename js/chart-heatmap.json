@@ -1,0 +1,210 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+
+
+  "width": 500,
+  "height": 300,
+
+  "data": {
+    "url": "data/brisbane_age_category.csv"
+  },
+
+  "transform": [
+    {
+      "fold": ["Adult", "YA", "Juvenile"],
+      "as": ["Audience", "Checkouts"]
+    },
+
+    {
+      "calculate": "datum.Audience == 'Juvenile' ? 'Juvenile (under 18)' : datum.Audience == 'YA' ? 'Young Adults (18–44)' : 'Adults (45+)'",
+      "as": "AudienceLabel"
+    },
+
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "Checkouts",
+          "as": "AudienceTotal"
+        }
+      ],
+      "groupby": ["Audience"]
+    },
+
+    {
+      "calculate": "datum.Checkouts / datum.AudienceTotal * 100",
+      "as": "Percentage"
+    },
+
+    {
+      "calculate": " round(datum.Percentage * 10) / 10 == 2.2 || round(datum.Percentage * 10) / 10 == 5.8 ||round(datum.Percentage * 10) / 10 == 3.3 ? '' : format(datum.Percentage, '.1f') + '%'",
+      "as": "PercentageLabel"
+    },
+    {
+      "calculate": "format(datum.Percentage, '.1f') + '%'",
+      "as": "TooltipPercentage"
+    }
+  ],
+
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+
+      "encoding": {
+        "x": {
+          "field": "AudienceLabel",
+          "type": "nominal",
+          "title": "Audience",
+          "sort": [
+            "Juvenile (under 18)",
+            "Young Adults (18–44)",
+            "Adults (45+)"
+          ],
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 15,
+            "titleFontSize": 15
+          }
+        },
+
+ "y": {
+  "field": "Category",
+  "type": "nominal",
+  "title": ["Reading", "Category"],
+  "sort": [
+    "Graphic Novels",
+    "Non-Fiction",
+    "Fiction",
+    "Magazines",
+    "Picture Books"
+  ],
+  "axis": {
+    "labelFontSize": 15,
+    "labelPadding": 8,
+    "titleFontSize": 15,
+    "titleFontWeight": "bold",
+    "titlePadding": 15,
+    "titleAngle": 0,
+    "titleLineHeight": 18
+  }
+},
+
+        "color": {
+          "field": "Percentage",
+          "type": "quantitative",
+          "title": [
+          "Share of checkouts",
+          "(%)"
+        ],
+          "scale": {
+  "domain": [0, 60],
+  "range": [
+    "#F5E6D3",
+    "#6B341B"
+  ]
+},
+  "legend": {
+  "orient": "bottom",
+  "direction": "horizontal",
+  "gradientLength": 500,
+  "gradientThickness": 15,
+  "title": "Share of checkouts (%)",
+  "titleOrient": "top",
+  "titleAnchor": "middle",
+  "values": [0, 10, 20, 30, 40, 50, 60],
+  "labelExpr": "datum.value + '%'",
+  "labelFontSize": 13,
+  "titleFontSize": 14,
+  "offset": 20
+}
+        },
+
+        "tooltip": [
+          {
+            "field": "AudienceLabel",
+            "type": "nominal",
+            "title": "Audience"
+          },
+          {
+            "field": "Category",
+            "type": "nominal",
+            "title": "Category"
+          },
+          {
+            "field": "Checkouts",
+            "type": "quantitative",
+            "title": "Checkout records",
+            "format": ","
+          },
+          {
+            "field": "TooltipPercentage",
+            "type": "nominal",
+            "title": "Share of audience checkouts (%)"
+          }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 14,
+        "fontWeight": "bold"
+      },
+
+      "encoding": {
+        "x": {
+          "field": "AudienceLabel",
+          "type": "nominal",
+          "sort": [
+            "Juvenile (under 18)",
+            "Young Adults (18–44)",
+            "Adults (45+)"
+          ]
+        },
+
+        "y": {
+        "field": "Category",
+        "type": "nominal",
+        "sort": [
+          "Graphic Novels",
+          "Non-Fiction",
+          "Fiction",
+          "Magazines",
+          "Picture Books"
+        ]
+      },
+
+        "text": {
+          "field": "PercentageLabel"
+        },
+
+        "color": {
+          "condition": {
+            "test": "datum.Percentage >= 30",
+            "value": "white"
+          },
+          "value": "black"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "view": {
+      "stroke": null
+    },
+
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "titleFontWeight": "bold"
+    }
+  }
+}
